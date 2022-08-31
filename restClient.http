@@ -1,0 +1,78 @@
+@entryPoint = http://localhost:4100/api/v1
+
+@accessToken = Authorization: Bearer 
+
+@refreshToken = Authorization: Bearer 
+
+
+#& -----------------------------------------------
+#~ ------------------------------------------ USER
+#& -----------------------------------------------
+
+#~ ------------------------ doSignUp
+###
+POST {{entryPoint}}/signup
+Content-Type: application/json
+
+{
+    "username": "Yumedo",
+    "email": "yumedo9@survivor.com",
+    "password": "N6y$Ozddzt=1aa",
+    "passwordConfirm": "N6y$Ozddzt=1aa"
+}
+
+#~ ------------------------ doSignIn
+###
+POST {{entryPoint}}/signin
+Content-Type: application/json
+
+{
+  "email": "yumedo@survivor.com",
+  "password": "N6y$Ozddzt=1aa"
+}
+
+#~ ------------------------ doSignOut
+###
+GET {{entryPoint}}/signout
+Content-Type: application/json
+{{refreshToken}}
+
+
+#^ ------------------------ fetchAllUsers
+###
+GET {{entryPoint}}/users
+Content-Type: application/json
+
+
+#^ ------------------------ fetchOneUser
+###
+GET {{entryPoint}}/users/5
+Content-Type: application/json
+{{accessToken}}
+
+
+#^ ------------------------ updateUser
+###
+PATCH {{entryPoint}}/users/11
+Content-Type: application/json
+{{accessToken}}
+
+{
+    "username": "Yumedo",
+}
+
+
+#^ ------------------------ deleteUser
+###
+DELETE {{entryPoint}}/users/13
+Content-Type: application/json
+{{accessToken}}
+
+#& -----------------------------------------------
+#~ --------------------------------------- ARTICLE
+#& -----------------------------------------------
+
+
+#& -----------------------------------------------
+#~ -------------------------------------- CATEGORY
+#& -----------------------------------------------

@@ -7,7 +7,7 @@ API Yumelio is an API for creating a portfolio.
 Technologies used for it are :
 
 NodeJS Express Framework
-TypeScript 
+TypeScript
 Json Web Token & Session
 Bcrypt for passwords
 Dotenv to configure environment variables

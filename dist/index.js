@@ -8,6 +8,8 @@ import helmet from 'helmet';
 app.use(helmet());
 import debug from 'debug';
 const logger = debug('EntryPoint');
+import { specs, serve, setup, cssOptions } from './app/swaggerDocs/swaggerDocs.js';
+app.use('/api-docs', serve, setup(specs, cssOptions));
 app.use(express.json());
 app.use(express.urlencoded({
     extended: false
@@ -34,7 +36,7 @@ app.use(session({
 }));
 app.use(router);
 app.use((req, res) => {
-    throw new ErrorApi(`Page non trouvée !`, req, res, 404);
+    throw new ErrorApi(`Page not found !`, req, res, 404);
 });
 if (process.env.NODE_ENV !== 'test') {
     const PORT = process.env.PORT ?? 3000;

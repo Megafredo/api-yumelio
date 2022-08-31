@@ -19,6 +19,10 @@ app.use(helmet());
 import debug from 'debug';
 const logger = debug('EntryPoint');
 
+//~ IMPORTATION SWAGGER DOCS
+import { specs, serve, setup, cssOptions} from './app/swaggerDocs/swaggerDocs.js';
+app.use('/api-docs', serve, setup(specs, cssOptions));
+
 //~ Encoding
 //accept Content-type: application/json
 app.use(express.json());
@@ -42,7 +46,7 @@ app.use((req: Request, res: Response, next) => {
 
 //If you have your node.js behind a proxy and are using secure: true, you need to set 'trust proxy' in express
 app.set('trust proxy', 1);
-// trust first proxy if deploy Heroku
+// trust first proxy if deploy
 
 //~ Session
 import session from 'express-session';

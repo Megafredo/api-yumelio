@@ -17,7 +17,7 @@ And than, install all the packages needed
 And dev dependencies
 
 ```sh
-npm i -D typescript debug jest supertest ts-jest concurrently eslint @types/bcrypt @types/debug @types/express @types/jest @types/supertest @types/express-session @types/pg
+npm i -D typescript debug jest supertest ts-jest concurrently eslint @types/bcrypt @types/debug @types/express @types/jest @types/supertest @types/express-session @types/pg @types/swagger-jsdoc @types/swagger-ui-express
 ```
 
 Without the @types/express, @types/debug packages etc.., there is no way for TypeScript to know about the types of these classes.
@@ -102,6 +102,8 @@ Complete code
     "@types/jest": "^29.0.0",
     "@types/pg": "^8.6.5",
     "@types/supertest": "^2.0.12",
+    "@types/swagger-jsdoc": "^6.0.1",
+    "@types/swagger-ui-express": "^4.1.3",
     "@typescript-eslint/eslint-plugin": "^5.36.1",
     "@typescript-eslint/parser": "^5.36.1",
     "concurrently": "^7.3.0",
