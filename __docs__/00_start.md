@@ -8,23 +8,27 @@ First of all, you need to initialize the folder
 npm init
 ```
 
-And than, install all the packages needed 
+And than, install all the packages needed
 
 ```sh
  npm i dotenv pg express-session helmet ajv bcrypt jsonwebtoken swagger-jsdoc swagger-ui-express
 ```
+
 And dev dependencies
 
 ```sh
-npm i -D typescript debug jest supertest ts-jest concurrently eslint @types/bcrypt @types/debug @types/express @types/jest @types/supertest
+npm i -D typescript debug jest supertest ts-jest concurrently eslint @types/bcrypt @types/debug @types/express @types/jest @types/supertest @types/express-session @types/pg
 ```
+
+Without the @types/express, @types/debug packages etc.., there is no way for TypeScript to know about the types of these classes.
+
 And config eslint
 
 ```sh
 npm init @eslint/config
 ```
-This will ask you a series of questions
 
+This will ask you a series of questions
 
     How would you like to use ESLint? · To check syntax and find problems
     √ What type of modules does your project use? · JavaScript modules (import/export)
@@ -41,7 +45,7 @@ The config that you've selected requires the following dependencies:
 @typescript-eslint/eslint-plugin@latest @typescript-eslint/parser@latest
 √ Would you like to install them now? · No / Yes
 √ Which package manager do you want to use? · npm
-Installing @typescript-eslint/eslint-plugin@latest, @typescript-eslint/parser@latest      
+Installing @typescript-eslint/eslint-plugin@latest, @typescript-eslint/parser@latest
 
 added 12 packages, and audited 644 packages in 3s
 
@@ -51,14 +55,16 @@ added 12 packages, and audited 644 packages in 3s
 found 0 vulnerabilities
 Successfully created .eslintrc.js file in C:\Users\Gamer\Desktop\api-yumelio
 ```
+
 ## Configure package.json
 
 - Add description
 - Add `"type":"module"`
 - Change main into `"dist/index.js` (once compiled, we tell Node to get this file as main entry point)
 - Configure `"script"`
+- Add "concurrently" to launch compiler and your server
 
-Complete code 
+Complete code
 
 ```js
 {
@@ -92,7 +98,9 @@ Complete code
     "@types/bcrypt": "^5.0.0",
     "@types/debug": "^4.1.7",
     "@types/express": "^4.17.13",
+    "@types/express-session": "^1.17.5",
     "@types/jest": "^29.0.0",
+    "@types/pg": "^8.6.5",
     "@types/supertest": "^2.0.12",
     "@typescript-eslint/eslint-plugin": "^5.36.1",
     "@typescript-eslint/parser": "^5.36.1",
@@ -104,7 +112,7 @@ Complete code
     "ts-jest": "^28.0.8",
     "typescript": "^4.8.2"
   },
-  "jest": {
+  "jest": { // Jest configuration
       "forceExit": true,
       "collectCoverage": false,
       "verbose": true,
@@ -113,6 +121,31 @@ Complete code
 }
 
 ```
-___ 
 
-[Home](../README.md) | [Next]()
+## tsconfig.json file
+
+Configure the `tsconfig.json` file
+
+```sh
+{
+  "compilerOptions": {
+    "module": "ES6",
+    "esModuleInterop": true,
+    "target": "es6",
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "outDir": "dist"
+  },
+  "lib": ["es2015"],
+  "compileOnSave": true
+}
+
+```
+
+I use ESM and i want to compile Typescript on save so add `compileOnSave` on true.
+
+The `outDir` can specify where the file will be save once compiled.
+
+---
+
+[Home](../README.md) | [Next](./01_folder.md)

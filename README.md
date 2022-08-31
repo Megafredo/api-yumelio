@@ -30,6 +30,7 @@ Supertest
 ## Summary
 
 - [Start](./__docs__/00_start.md)
+- [Folder Structure](./__docs__/01_folder.md)
 
 ---
 
