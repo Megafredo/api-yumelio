@@ -1,1 +1,1 @@
-{"version":3,"file":"article.js","sourceRoot":"","sources":["../../../src/app/datamappers/article.ts"],"names":[],"mappings":""}
+{"version":3,"file":"article.js","sourceRoot":"","sources":["../../../src/app/datamappers/article.ts"],"names":[],"mappings":"AACA,OAAO,MAAM,MAAM,mBAAmB,CAAC;AACvC,OAAO,EAAE,cAAc,EAAE,MAAM,qBAAqB,CAAC;AAErD,MAAM,iBAAkB,SAAQ,cAAc;IAC5C,SAAS,GAAG,SAAS,CAAC;IACtB,OAAO,GAAG,+CAA+C,CAAC;IAG1D,kBAAkB,GAAG,gBAAgB,CAAC;IACtC,kBAAkB,GAAG,gBAAgB,CAAC;CACvC;AAED,MAAM,OAAO,GAAG,IAAI,iBAAiB,CAAC,MAAM,CAAC,CAAC;AAE9C,OAAO,EAAE,OAAO,EAAE,CAAC"}

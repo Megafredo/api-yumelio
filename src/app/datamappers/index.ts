@@ -1,7 +1,7 @@
 import { User } from './user.js';
-import { ArticlePortfolio } from './articlePortfolio.js';
-import { ArticleProject } from './articleProject.js';
+import { Project } from './project.js';
+import { Article } from './article.js';
 import { Category } from './category.js';
-import { GoldenBook } from './goldenBook.js';
+import { GoldenBookTicket } from './GoldenBookTicket.js';
 
-export { User, ArticlePortfolio, ArticleProject, Category, GoldenBook };
+export { User, Project, Article, Category, GoldenBookTicket };

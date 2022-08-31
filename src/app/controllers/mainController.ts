@@ -4,10 +4,10 @@ const logger = debug('Controller');
 import { Request, Response } from 'express';
 
 //~ Controller
-function renderHomePage(req:Request, res:Response) {
+function renderHomePage(req: Request, res: Response) {
   try {
     res.json({
-      message: 'Welcome to Yumelio API',
+      message: 'Welcome to Yumelio API'
     });
   } catch (err) {
     if (err instanceof Error) logger(err.message);

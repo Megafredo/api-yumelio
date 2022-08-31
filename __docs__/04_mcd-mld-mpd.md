@@ -33,6 +33,6 @@ Using the workbench, you can create a physical data model in several ways:
 
 For PDM, we use the ERD Tool from pgAdmin4
 
-![PDM](./img/mpd.jpg)
+![PDM](./img/MPD.png)
 
 [Previous](./03_usecase.md) | [Home](../README.md) | [Next](.)

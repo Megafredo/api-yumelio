@@ -1,5 +1,5 @@
 //~ Import modules
-import {Pool} from 'pg';
+import { Pool } from 'pg';
 import client from '../db/database.js';
 import { CoreDataMapper } from './coreDataMapper.js';
 

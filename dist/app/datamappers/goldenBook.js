@@ -1,11 +1,11 @@
 import client from '../db/database.js';
 import { CoreDataMapper } from './coreDataMapper.js';
-class GoldenBookDataMapper extends CoreDataMapper {
-    tableName = 'golden_book';
+class GoldenBookTicketDataMapper extends CoreDataMapper {
+    tableName = 'gb_ticket';
     columns = `'id', 'content', 'created_at'`;
-    createFunctionName = 'create_golden_book';
-    updateFunctionName = 'update_golden_book';
+    createFunctionName = 'create_gb_ticket';
+    updateFunctionName = 'update_gb_ticket';
 }
-const GoldenBook = new GoldenBookDataMapper(client);
-export { GoldenBook };
+const GoldenBookTicket = new GoldenBookTicketDataMapper(client);
+export { GoldenBookTicket };
 //# sourceMappingURL=goldenBook.js.map
