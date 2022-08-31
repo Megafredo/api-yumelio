@@ -10,7 +10,6 @@ import { components } from './swaggerUtils/swaggerComponents.js';
 // import { articles, oneArticle, articlesByCategory, articlesByUser, lastestArticles, searchAllArticles } from './swaggerEndpoints/article.js';
 // import { articleComments, articlesCommentsById, articlesCommentsByUser } from './swaggerEndpoints/articleComment.js';
 
-
 //users
 // import { users, oneUser } from './swaggerEndpoints/user.js';
 
@@ -48,33 +47,21 @@ const options = {
 
     // Tous les chemins ( GET / POST / PATCH / DELETE )
     paths: {
-    //   //~ AUTH
-    //   '/signup': signup,
-    //   '/signin': signin,
-    //   '/signout': signout,
-    //   '/refreshToken': refreshToken,
-
-
-    //   //~ USERS
-    //   '/users': users,
-    //   '/users/{userId}': oneUser,
-
-
-    //   //~ ARTICLES
-    //   '/articles': articles,
-    //   '/articles/{articleId}': oneArticle,
-
-    //   '/categories/{categoryId}/articles': articlesByCategory,
-    //   '/users/{userId}/articles': articlesByUser,
-    //   '/articles/last': lastestArticles,
-    //   '/articles/search': searchAllArticles,
-
-
-
-
-
-  
-
+      //   //~ AUTH
+      //   '/signup': signup,
+      //   '/signin': signin,
+      //   '/signout': signout,
+      //   '/refreshToken': refreshToken,
+      //   //~ USERS
+      //   '/users': users,
+      //   '/users/{userId}': oneUser,
+      //   //~ ARTICLES
+      //   '/articles': articles,
+      //   '/articles/{articleId}': oneArticle,
+      //   '/categories/{categoryId}/articles': articlesByCategory,
+      //   '/users/{userId}/articles': articlesByUser,
+      //   '/articles/last': lastestArticles,
+      //   '/articles/search': searchAllArticles,
     },
     // Tous les schemas
     components
