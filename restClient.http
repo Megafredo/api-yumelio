@@ -72,7 +72,93 @@ Content-Type: application/json
 #~ --------------------------------------- ARTICLE
 #& -----------------------------------------------
 
+#^ ------------------------ createArticle
+
+#^ ------------------------ fetchOneArticle
+
+#^ ------------------------ updateArticle
+
+#^ ------------------------ deleteArticle
+
+#& -----------------------------------------------
+#~ --------------------------------------- PROJECT
+#& -----------------------------------------------
+
+#^ ------------------------ createProject
+
+#^ ------------------------ fetchAllProjects
+
+#^ ------------------------ fetchOneProject
+
+#^ ------------------------ updateProject
+
+#^ ------------------------ deleteProject
+
+#& -----------------------------------------------
+#~ ------------------------------------- GB-TICKET
+#& -----------------------------------------------
+
+#^ ------------------------ createGoldenBookTicket
+###
+POST {{entryPoint}}/gb-tickets
+Content-Type: application/json
+
+{
+  "content" : "test",
+  "created_at" : "svg"
+}
+
+#^ ------------------------ fetchAllGoldenBookTickets
+###
+GET {{entryPoint}}/gb-tickets
+Content-Type: application/json
+
+#^ ------------------------ updateGoldenBookTicket
+###
+UPDATE {{entryPoint}}/gb-tickets/1
+Content-Type: application/json
+
+{
+
+}
+
+#^ ------------------------ deleteGoldenBookTicket
+###
+DELETE {{entryPoint}}/gb-tickets/1
+Content-Type: application/json
 
 #& -----------------------------------------------
 #~ -------------------------------------- CATEGORY
 #& -----------------------------------------------
+
+#^ ------------------------ createCategory
+###
+POST {{entryPoint}}/categories
+Content-Type: application/json
+
+{
+  "name" : "test",
+  "logo" : "svg",
+  "color": "#000"
+}
+
+#^ ------------------------ fetchAllCategories
+###
+GET {{entryPoint}}/categories
+Content-Type: application/json
+
+#^ ------------------------ updateCategory
+###
+PATCH {{entryPoint}}/categories/1
+Content-Type: application/json
+
+{
+  "name" : "test",
+  "logo" : "svg",
+  "color": "#000"
+}
+
+#^ ------------------------ deleteCategory
+###
+DELETE {{entryPoint}}/categories/1
+Content-Type: application/json

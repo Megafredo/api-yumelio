@@ -14,7 +14,7 @@ const validation = {
      * @description On récupère le schéma établi avec le module Joi pour la validation du body 
      * @returns 
      */
-    body(schemaCustom) {
+    body(schemaCustom:any) {
       //valid req.body format
       return function(req:Request, res:Response, next:NextFunction) {
         const { error } = schemaCustom.validate(req.body);
