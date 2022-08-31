@@ -3,7 +3,7 @@ const logger = debug('Controller');
 function renderHomePage(req, res) {
     try {
         res.json({
-            message: 'Welcome to yumelio API',
+            message: 'Welcome to Yumelio API',
         });
     }
     catch (err) {

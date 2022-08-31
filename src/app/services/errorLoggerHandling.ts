@@ -11,23 +11,22 @@ const __dirname = resolve(`./src/app/services`);
 //~ Logger
 import debug from 'debug';
 const logger = debug('ErrorHandling');
-    /**
-     * Manage error
-     */
-function errorLoggerHandling(message:string, req:Request, res:Response) {
-    const actualDate = new Date();
+/**
+ * Manage error
+ */
+function errorLoggerHandling(message: string, req: Request, res: Response) {
+  const actualDate = new Date();
 
-    // format error message : Date + url + message
-    const logMessage = `${actualDate.toLocaleString()} - ${req.url} - ${message}\r`;
+  // format error message : Date + url + message
+  const logMessage = `${actualDate.toLocaleString()} - ${req.url} - ${message}\r`;
 
-    // date format YYYY-MONTH-DD
-    const fileName = `${formattedDate}.log`;
+  // date format YYYY-MONTH-DD
+  const fileName = `${formattedDate}.log`;
 
-    // create a log and write it in your file
-    fs.appendFile(join(__dirname, `../../../logs/${fileName}`), logMessage, error => {
-      if (error) logger(error);
-    });
-  
-};
+  // create a log and write it in your file
+  fs.appendFile(join(__dirname, `../../../logs/${fileName}`), logMessage, (error) => {
+    if (error) logger(error);
+  });
+}
 
 export { errorLoggerHandling };

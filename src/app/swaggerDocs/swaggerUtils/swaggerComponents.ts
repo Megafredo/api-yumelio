@@ -1,5 +1,3 @@
-const components = {
-
-}
+const components = {};
 
 export { components };

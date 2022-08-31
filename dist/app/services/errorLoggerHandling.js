@@ -8,11 +8,10 @@ function errorLoggerHandling(message, req, res) {
     const actualDate = new Date();
     const logMessage = `${actualDate.toLocaleString()} - ${req.url} - ${message}\r`;
     const fileName = `${formattedDate}.log`;
-    fs.appendFile(join(__dirname, `../../../logs/${fileName}`), logMessage, error => {
+    fs.appendFile(join(__dirname, `../../../logs/${fileName}`), logMessage, (error) => {
         if (error)
             logger(error);
     });
 }
-;
 export { errorLoggerHandling };
 //# sourceMappingURL=errorLoggerHandling.js.map

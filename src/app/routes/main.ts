@@ -1,4 +1,4 @@
-//~ Import Router 
+//~ Import Router
 import { Router } from 'express';
 const router = Router();
 

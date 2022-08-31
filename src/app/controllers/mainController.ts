@@ -7,7 +7,7 @@ import { Request, Response } from 'express';
 function renderHomePage(req:Request, res:Response) {
   try {
     res.json({
-      message: 'Welcome to yumelio API',
+      message: 'Welcome to Yumelio API',
     });
   } catch (err) {
     if (err instanceof Error) logger(err.message);
