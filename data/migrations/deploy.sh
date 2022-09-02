@@ -11,7 +11,7 @@ export PGPASSWORD=u*A0E#$!
 # Deploy Global :
 sqitch deploy -d yumelio yumelio_v1
 sqitch deploy -d yumelio yumelio_v2
-# sqitch deploy -d yumelio yumelio_v3
+sqitch deploy -d yumelio yumelio_v3
 # sqitch deploy -d yumelio yumelio_v4
 # sqitch deploy -d yumelio yumelio_v5
 # sqitch deploy -d yumelio yumelio_v6
