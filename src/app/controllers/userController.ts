@@ -11,28 +11,26 @@ import { generateAccessToken, generateRefreshToken } from '../services/jsonWebTo
 import debug from 'debug';
 const logger = debug('Controller');
 
-
 //~Controllers
 async function doSignUp(req: Request, res: Response) {
   try {
     let { email, password, passwordConfirm } = req.body;
 
-        //~ User already exist ?
-        const userExist = await User.findUser(email);
+    //~ User already exist ?
+    const userExist = await User.findUser(email);
 
-        if (userExist) throw new ErrorApi(`L'utilisateur existe déjà !`, req, res, 401);
+    if (userExist) throw new ErrorApi(`User already exist !`, req, res, 401);
 
-        //~ Encrypt password if password exist
-        if (password !== passwordConfirm) throw new ErrorApi(`Les mots de passe ne sont pas identiques`, req, res, 401);
-        const salt = await bcrypt.genSalt(10);
-        password = await bcrypt.hash(password, salt);
-        //replace password in body
-        req.body.password = password;
+    //~ Encrypt password if password exist
+    if (password !== passwordConfirm) throw new ErrorApi(`Not the same password`, req, res, 401);
+    const salt = await bcrypt.genSalt(10);
+    password = await bcrypt.hash(password, salt);
+    //replace password in body
+    req.body.password = password;
 
-        //~ Create user
-        await User.create(req.body);
-    return res.status(201).json(`L'utilisateur a bien été créé`);
-    
+    //~ Create user
+    await User.create(req.body);
+    return res.status(201).json(`User successfully created !`);
   } catch (err) {
     if (err instanceof Error) logger(err.message);
   }
@@ -40,6 +38,27 @@ async function doSignUp(req: Request, res: Response) {
 
 async function doSignIn(req: Request, res: Response) {
   try {
+    let { email, password } = req.body;
+
+    //~ User already exist ?
+    const userExist = await User.findUser(email);
+
+    if (!userExist) throw new ErrorApi(`User unknown !`, req, res, 401);
+
+    //~ Security
+    const validPwd = await bcrypt.compare(password, userExist.password);
+
+    if (!validPwd) throw new ErrorApi(`Email or password not valid !`, req, res, 401);
+
+    const { ['password']: remove, ...user } = userExist;
+
+    //~ Authorization JWT
+    let accessToken = generateAccessToken({ user });
+    let refreshToken = generateRefreshToken({ user }, req);
+
+    let userIdentity = { ...user, accessToken, refreshToken };
+
+    return res.status(200).json(userIdentity);
   } catch (err) {
     if (err instanceof Error) logger(err.message);
   }
@@ -47,6 +66,11 @@ async function doSignIn(req: Request, res: Response) {
 
 async function doSignOut(req: Request, res: Response) {
   try {
+
+    req.user = null;
+    req.session.destroy();
+
+    return res.status(204).json(`User disconnected !`);
   } catch (err) {
     if (err instanceof Error) logger(err.message);
   }

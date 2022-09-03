@@ -1,3 +1,4 @@
+//& Convert logo Fetch all categories
 function baseConvertSvg(categories: object) {
   const convert = [];
   for (let [k, value] of Object.entries(categories)) {
@@ -11,21 +12,21 @@ function baseConvertSvg(categories: object) {
 
 
 //& Convert svg for Fetch all categories by article || project
-function baseConvertSvgByElement(categoriesData) {
-  let categories = [];
-  let { category } = categoriesData[0];
+// function baseConvertSvgByElement(categoriesData) {
+//   let categories = [];
+//   let { category } = categoriesData[0];
 
-  const convert = [];
-  for (let [k, value] of Object.entries(category)) {
-    const category_name = value.category_name;
-    const logo = Buffer.from(value.logo, 'base64').toString('utf-8');
-    convert.push({ category_name, logo });
-  }
+//   const convert = [];
+//   for (let [k, value] of Object.entries(category)) {
+//     const category_name = value.category_name;
+//     const logo = Buffer.from(value.logo, 'base64').toString('utf-8');
+//     convert.push({ category_name, logo });
+//   }
 
-  categoriesData[0] = { ...categoriesData[0], category: convert };
-  categories.push(categoriesData[0]);
+//   categoriesData[0] = { ...categoriesData[0], category: convert };
+//   categories.push(categoriesData[0]);
 
-  return categories;
-}
+//   return categories;
+// }
 
-export { baseConvertSvg, baseConvertSvgByElement };
+export { baseConvertSvg };

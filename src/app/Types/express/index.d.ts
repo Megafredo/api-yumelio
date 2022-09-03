@@ -6,14 +6,16 @@ export {};
 declare global {
   namespace Express {
     export interface Request {
-      user?: User;
+      user?: User | null;
     }
   }
 }
 
 declare module 'express-session' {
+  
   interface SessionData {
     token?: string;
     refreshToken?: string | string[];
+    destroy:any; //TODO 
   }
 }

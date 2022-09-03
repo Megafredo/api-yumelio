@@ -24,6 +24,14 @@ function fetchOneProject(req, res) {
             logger(err.message);
     }
 }
+function fetchAllProjectsWithCategories(req, res) {
+    try {
+    }
+    catch (err) {
+        if (err instanceof Error)
+            logger(err.message);
+    }
+}
 function updateProject(req, res) {
     try {
     }
@@ -40,5 +48,5 @@ function deleteProject(req, res) {
             logger(err.message);
     }
 }
-export { createProject, fetchAllProjects, fetchOneProject, updateProject, deleteProject };
+export { createProject, fetchAllProjects, fetchOneProject, fetchAllProjectsWithCategories, updateProject, deleteProject };
 //# sourceMappingURL=projectController.js.map

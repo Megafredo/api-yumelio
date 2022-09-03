@@ -7,8 +7,8 @@ interface CoreDataMapper {
   createFunctionName: string;
   updateFunctionName: string;
 
-  categoriesArticleFunctionName: string;
-  categoriesProjectFunctionName: string;
+  allProjectsWithCategories:string;
+
 }
 
 class CoreDataMapper {

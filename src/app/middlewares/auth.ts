@@ -4,7 +4,7 @@ import { Request, Response, NextFunction } from 'express';
 
 
 //~ Authentication
-function auth(req:Request, res:Response, next: NextFunction) {
+function auth(req:Request, res:Response, next: NextFunction):void {
   if (!req.user) throw new ErrorApi(`L'utilisateur n'est pas connecté`, req, res, 401);
 
   next();

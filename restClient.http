@@ -15,8 +15,9 @@ POST {{entryPoint}}/signup
 Content-Type: application/json
 
 {
-    "username": "Yumedo",
-    "email": "yumedo9@survivor.com",
+    "first_name": "Yumedo",
+    "last_name": "Yumedo",
+    "email": "yumedo@survivor.com",
     "password": "N6y$Ozddzt=1aa",
     "passwordConfirm": "N6y$Ozddzt=1aa"
 }
@@ -137,13 +138,13 @@ Content-Type: application/json
 
 #^ ------------------------ fetchOneProject
 ###
-GET {{entryPoint}}/projects
+GET {{entryPoint}}/projects/1
 Content-Type: application/json
 
 
 #^ ------------------------ updateProject
 ###
-PATCH {{entryPoint}}/projects
+PATCH {{entryPoint}}/projects/1
 Content-Type: application/json
 
 {
@@ -161,7 +162,10 @@ Content-Type: application/json
 DELETE {{entryPoint}}/projects/1
 Content-Type: application/json
 
-
+#^ ------------------------ fetchAllProjectsWithCategories
+###
+GET {{entryPoint}}/projects/categories
+Content-Type: application/json
 
 #& -----------------------------------------------
 #~ ------------------------------------- GB-TICKET

@@ -23,6 +23,12 @@ function fetchOneProject(req: Request, res: Response) {
     if (err instanceof Error) logger(err.message);
   }
 }
+function fetchAllProjectsWithCategories(req: Request, res: Response) {
+  try {
+  } catch (err) {
+    if (err instanceof Error) logger(err.message);
+  }
+}
 function updateProject(req: Request, res: Response) {
   try {
   } catch (err) {
@@ -36,4 +42,4 @@ function deleteProject(req: Request, res: Response) {
   }
 }
 
-export { createProject, fetchAllProjects, fetchOneProject, updateProject, deleteProject };
+export { createProject, fetchAllProjects, fetchOneProject, fetchAllProjectsWithCategories, updateProject, deleteProject };
