@@ -3,13 +3,13 @@ import debug from 'debug';
 const logger = debug('Pool');
 
 //~ Import pg
-import { Pool } from 'pg';
+import pg from 'pg';
 // Deployement
 // const client = new pg.Pool({
 //   connectionString: process.env.DATABASE_URL,
 //   ssl: { rejectUnauthorized: false }
 // });
-const client = new Pool();
+const client = new pg.Pool();
 
 client
   .connect()

@@ -73,26 +73,95 @@ Content-Type: application/json
 #& -----------------------------------------------
 
 #^ ------------------------ createArticle
+###
+POST {{entryPoint}}/articles
+Content-Type: application/json
+
+{
+    "title": "Super article !",
+    "abstract": "Description de mon article",
+    "content": "Ceci est mon article",
+    "user_id": 1
+}
+
+#^ ------------------------ fetchAllArticles
+###
+GET {{entryPoint}}/articles
+Content-Type: application/json
 
 #^ ------------------------ fetchOneArticle
+###
+GET {{entryPoint}}/articles/1
+Content-Type: application/json
 
 #^ ------------------------ updateArticle
+###
+PATCH {{entryPoint}}/articles/1
+Content-Type: application/json
+
+{
+    "title": "Super article modifié !",
+    "abstract": "Description de mon article modifié",
+    "content": "Ceci est mon article modifié",
+    "user_id": 1
+}
 
 #^ ------------------------ deleteArticle
+###
+DELETE {{entryPoint}}/articles/1
+Content-Type: application/json
 
 #& -----------------------------------------------
 #~ --------------------------------------- PROJECT
 #& -----------------------------------------------
 
 #^ ------------------------ createProject
+###
+POST {{entryPoint}}/projects
+Content-Type: application/json
+
+{
+    "title": "Super projet !",
+    "abstract": "Description de mon projet",
+    "content": "Ceci est mon projet",
+    "picture": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/940.jpg",
+    "date": "10 Mars 2022",
+    "user_id": 1,
+    "link": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/940.jpg"
+}
 
 #^ ------------------------ fetchAllProjects
+###
+GET {{entryPoint}}/projects
+Content-Type: application/json
 
 #^ ------------------------ fetchOneProject
+###
+GET {{entryPoint}}/projects
+Content-Type: application/json
+
 
 #^ ------------------------ updateProject
+###
+PATCH {{entryPoint}}/projects
+Content-Type: application/json
+
+{
+    "title": "Super projet modifié !",
+    "abstract": "Description de mon projet modifié",
+    "content": "Ceci est mon projet modifié",
+    "picture": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/940.jpg",
+    "date": "10 Mars 2022",
+    "user_id": 1,
+    "link": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/940.jpg"
+}
 
 #^ ------------------------ deleteProject
+###
+DELETE {{entryPoint}}/projects/1
+Content-Type: application/json
+
+
 
 #& -----------------------------------------------
 #~ ------------------------------------- GB-TICKET
@@ -104,8 +173,7 @@ POST {{entryPoint}}/gb-tickets
 Content-Type: application/json
 
 {
-  "content" : "test",
-  "created_at" : "svg"
+  "content" : "test"
 }
 
 #^ ------------------------ fetchAllGoldenBookTickets
@@ -119,13 +187,15 @@ UPDATE {{entryPoint}}/gb-tickets/1
 Content-Type: application/json
 
 {
-
+  "content" : "Update ticket"
 }
 
 #^ ------------------------ deleteGoldenBookTicket
 ###
 DELETE {{entryPoint}}/gb-tickets/1
 Content-Type: application/json
+
+
 
 #& -----------------------------------------------
 #~ -------------------------------------- CATEGORY

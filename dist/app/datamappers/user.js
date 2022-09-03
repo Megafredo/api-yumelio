@@ -1,4 +1,4 @@
-import { Pool } from 'pg';
+import pg from 'pg';
 import client from '../db/database.js';
 import { CoreDataMapper } from './coreDataMapper.js';
 class UserDataMapper extends CoreDataMapper {
@@ -7,7 +7,7 @@ class UserDataMapper extends CoreDataMapper {
     createFunctionName = 'create_user';
     updateFunctionName = 'update_user';
     async findUser(email) {
-        if (this.client instanceof Pool) {
+        if (this.client instanceof pg.Pool) {
             const preparedQuery = {
                 text: `
             SELECT ${this.columns},"password" FROM "${this.tableName}"

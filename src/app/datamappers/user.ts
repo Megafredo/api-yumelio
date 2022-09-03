@@ -1,5 +1,5 @@
 //~ Import modules
-import { Pool } from 'pg';
+import pg from 'pg';
 import client from '../db/database.js';
 import { CoreDataMapper } from './coreDataMapper.js';
 
@@ -13,7 +13,7 @@ class UserDataMapper extends CoreDataMapper {
 
   //& Find user by email
   async findUser(email: string) {
-    if (this.client instanceof Pool) {
+    if (this.client instanceof pg.Pool) {
       const preparedQuery = {
         text: `
             SELECT ${this.columns},"password" FROM "${this.tableName}"
@@ -30,5 +30,4 @@ class UserDataMapper extends CoreDataMapper {
 }
 
 const User = new UserDataMapper(client);
-
 export { User };

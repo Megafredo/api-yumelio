@@ -8,6 +8,14 @@ async function createArticle(req, res) {
             logger(err.message);
     }
 }
+async function fetchAllArticles(req, res) {
+    try {
+    }
+    catch (err) {
+        if (err instanceof Error)
+            logger(err.message);
+    }
+}
 async function fetchOneArticle(req, res) {
     try {
     }
@@ -32,5 +40,5 @@ async function deleteArticle(req, res) {
             logger(err.message);
     }
 }
-export { createArticle, fetchOneArticle, updateArticle, deleteArticle };
+export { createArticle, fetchAllArticles, fetchOneArticle, updateArticle, deleteArticle };
 //# sourceMappingURL=articleController.js.map

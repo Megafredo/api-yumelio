@@ -1,10 +1,10 @@
-import { Pool } from 'pg';
+import pg from 'pg';
 class CoreDataMapper {
     constructor(client) {
         this.client = client;
     }
     async create(inputData) {
-        if (this.client instanceof Pool) {
+        if (this.client instanceof pg.Pool) {
             const preparedQuery = {
                 text: `SELECT * FROM ${this.createFunctionName}($1);`,
                 values: [inputData]
@@ -14,7 +14,7 @@ class CoreDataMapper {
         }
     }
     async findAll() {
-        if (this.client instanceof Pool) {
+        if (this.client instanceof pg.Pool) {
             const preparedQuery = {
                 text: `
                     SELECT ${this.columns}
@@ -26,7 +26,7 @@ class CoreDataMapper {
         }
     }
     async findOne(id) {
-        if (this.client instanceof Pool) {
+        if (this.client instanceof pg.Pool) {
             const preparedQuery = {
                 text: `
                     SELECT ${this.columns} 
@@ -42,7 +42,7 @@ class CoreDataMapper {
         }
     }
     async update(inputData) {
-        if (this.client instanceof Pool) {
+        if (this.client instanceof pg.Pool) {
             const preparedQuery = {
                 text: `SELECT * FROM ${this.updateFunctionName}($1);`,
                 values: [inputData]
@@ -52,7 +52,7 @@ class CoreDataMapper {
         }
     }
     async delete(id) {
-        if (this.client instanceof Pool) {
+        if (this.client instanceof pg.Pool) {
             const preparedQuery = {
                 text: `
                         DELETE FROM "${this.tableName}"

@@ -11,6 +11,14 @@ async function createArticle(req: Request, res: Response) {
     if (err instanceof Error) logger(err.message);
   }
 }
+
+async function fetchAllArticles(req: Request, res: Response) {
+  try {
+  } catch (err) {
+    if (err instanceof Error) logger(err.message);
+  }
+}
+
 async function fetchOneArticle(req: Request, res: Response) {
   try {
   } catch (err) {
@@ -30,4 +38,4 @@ async function deleteArticle(req: Request, res: Response) {
   }
 }
 
-export { createArticle, fetchOneArticle, updateArticle, deleteArticle };
+export { createArticle, fetchAllArticles, fetchOneArticle, updateArticle, deleteArticle };

@@ -1,10 +1,14 @@
-import { Pool } from 'pg';
+import pg from 'pg';
 interface CoreDataMapper {
   client: object;
   tableName: string;
+  columns: string;
+
   createFunctionName: string;
   updateFunctionName: string;
-  columns: string;
+
+  categoriesArticleFunctionName: string;
+  categoriesProjectFunctionName: string;
 }
 
 class CoreDataMapper {
@@ -14,7 +18,7 @@ class CoreDataMapper {
 
   //& Create
   async create(inputData: object) {
-    if (this.client instanceof Pool) {
+    if (this.client instanceof pg.Pool) {
       const preparedQuery = {
         text: `SELECT * FROM ${this.createFunctionName}($1);`,
         values: [inputData]
@@ -26,7 +30,7 @@ class CoreDataMapper {
   }
   //& FindAll
   async findAll() {
-    if (this.client instanceof Pool) {
+    if (this.client instanceof pg.Pool) {
       const preparedQuery = {
         text: `
                     SELECT ${this.columns}
@@ -42,7 +46,7 @@ class CoreDataMapper {
 
   //& FindOne
   async findOne(id: number) {
-    if (this.client instanceof Pool) {
+    if (this.client instanceof pg.Pool) {
       const preparedQuery = {
         text: `
                     SELECT ${this.columns} 
@@ -62,7 +66,7 @@ class CoreDataMapper {
 
   //& Update
   async update(inputData: object) {
-    if (this.client instanceof Pool) {
+    if (this.client instanceof pg.Pool) {
       const preparedQuery = {
         text: `SELECT * FROM ${this.updateFunctionName}($1);`,
         values: [inputData]
@@ -75,7 +79,7 @@ class CoreDataMapper {
 
   //& Delete
   async delete(id: number) {
-    if (this.client instanceof Pool) {
+    if (this.client instanceof pg.Pool) {
       const preparedQuery = {
         text: `
                         DELETE FROM "${this.tableName}"

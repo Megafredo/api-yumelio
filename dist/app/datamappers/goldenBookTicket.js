@@ -8,4 +8,4 @@ class GoldenBookTicketDataMapper extends CoreDataMapper {
 }
 const GoldenBookTicket = new GoldenBookTicketDataMapper(client);
 export { GoldenBookTicket };
-//# sourceMappingURL=goldenBookTicket.js.map
+//# sourceMappingURL=GoldenBookTicket.js.map

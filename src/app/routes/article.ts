@@ -2,11 +2,12 @@
 import { Router } from 'express';
 const router = Router();
 
-import { createArticle, fetchOneArticle, updateArticle, deleteArticle } from '../controllers/articleController.js';
+import { createArticle, fetchAllArticles, fetchOneArticle, updateArticle, deleteArticle } from '../controllers/articleController.js';
 
 //~ Home
 router.post('/api/v1/articles', createArticle);
 
+router.get('/api/v1/articles', fetchAllArticles);
 router.get('/api/v1/articles/:articleId', fetchOneArticle);
 
 router.patch('/api/v1/articles/:articleId', updateArticle);

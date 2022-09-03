@@ -1,6 +1,28 @@
+import { ErrorApi } from '../services/errorHandler.js';
+import { User } from '../datamappers/index.js';
+import bcrypt from 'bcrypt';
 import debug from 'debug';
 const logger = debug('Controller');
-function doSignUp(req, res) {
+async function doSignUp(req, res) {
+    try {
+        let { email, password, passwordConfirm } = req.body;
+        const userExist = await User.findUser(email);
+        if (userExist)
+            throw new ErrorApi(`L'utilisateur existe déjà !`, req, res, 401);
+        if (password !== passwordConfirm)
+            throw new ErrorApi(`Les mots de passe ne sont pas identiques`, req, res, 401);
+        const salt = await bcrypt.genSalt(10);
+        password = await bcrypt.hash(password, salt);
+        req.body.password = password;
+        await User.create(req.body);
+        return res.status(201).json(`L'utilisateur a bien été créé`);
+    }
+    catch (err) {
+        if (err instanceof Error)
+            logger(err.message);
+    }
+}
+async function doSignIn(req, res) {
     try {
     }
     catch (err) {
@@ -8,7 +30,7 @@ function doSignUp(req, res) {
             logger(err.message);
     }
 }
-function doSignIn(req, res) {
+async function doSignOut(req, res) {
     try {
     }
     catch (err) {
@@ -16,7 +38,7 @@ function doSignIn(req, res) {
             logger(err.message);
     }
 }
-function doSignOut(req, res) {
+async function fetchAllUsers(req, res) {
     try {
     }
     catch (err) {
@@ -24,7 +46,7 @@ function doSignOut(req, res) {
             logger(err.message);
     }
 }
-function fetchAllUsers(req, res) {
+async function fetchOneUser(req, res) {
     try {
     }
     catch (err) {
@@ -32,7 +54,7 @@ function fetchAllUsers(req, res) {
             logger(err.message);
     }
 }
-function fetchOneUser(req, res) {
+async function updateUser(req, res) {
     try {
     }
     catch (err) {
@@ -40,15 +62,7 @@ function fetchOneUser(req, res) {
             logger(err.message);
     }
 }
-function updateUser(req, res) {
-    try {
-    }
-    catch (err) {
-        if (err instanceof Error)
-            logger(err.message);
-    }
-}
-function deleteUser(req, res) {
+async function deleteUser(req, res) {
     try {
     }
     catch (err) {
