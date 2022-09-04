@@ -3,16 +3,16 @@ import client from '../db/database.js';
 import { CoreDataMapper } from './coreDataMapper.js';
 class UserDataMapper extends CoreDataMapper {
     tableName = 'user';
-    columns = ` "id", "first_name", "last_name", "email", "password", "linkedin_url", "github_url", "instagram_url" `;
+    columns = ` "id", "first_name", "last_name", "email", "password", "linkedin_url", "github_url", "instagram_url"`;
     createFunctionName = 'create_user';
     updateFunctionName = 'update_user';
-    async findUser(email) {
+    userIdentity = 'user_identity';
+    async findUserIdentity(email) {
         if (this.client instanceof pg.Pool) {
             const preparedQuery = {
                 text: `
-            SELECT ${this.columns} FROM "${this.tableName}"
-            WHERE "email" = $1;
-            `,
+                SELECT * FROM "${this.userIdentity}"($1);
+                `,
                 values: [email]
             };
             const result = await this.client.query(preparedQuery);

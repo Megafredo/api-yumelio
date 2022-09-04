@@ -12,10 +12,14 @@ declare global {
 }
 
 declare module 'express-session' {
-  
   interface SessionData {
     token?: string;
     refreshToken?: string | string[];
-    destroy:any; //TODO 
   }
+
+  interface Session {
+    destroy(): void;
+  }
+
 }
+

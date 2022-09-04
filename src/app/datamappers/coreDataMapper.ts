@@ -8,7 +8,7 @@ interface CoreDataMapper {
   updateFunctionName: string;
 
   allProjectsWithCategories:string;
-
+  userIdentity: string;
 }
 
 class CoreDataMapper {

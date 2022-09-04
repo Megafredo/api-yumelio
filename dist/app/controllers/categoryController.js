@@ -32,21 +32,5 @@ function deleteCategory(req, res) {
             logger(err.message);
     }
 }
-async function fetchAllCategories(req, res) {
-    try {
-    }
-    catch (err) {
-        if (err instanceof Error)
-            logger(err.message);
-    }
-}
-async function fetchAllCategories(req, res) {
-    try {
-    }
-    catch (err) {
-        if (err instanceof Error)
-            logger(err.message);
-    }
-}
 export { createCategory, fetchAllCategories, updateCategory, deleteCategory };
 //# sourceMappingURL=categoryController.js.map

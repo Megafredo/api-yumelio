@@ -5,20 +5,20 @@ import { CoreDataMapper } from './coreDataMapper.js';
 
 class UserDataMapper extends CoreDataMapper {
   tableName = 'user';
-  columns = ` "id", "first_name", "last_name", "email", "password", "linkedin_url", "github_url", "instagram_url" `;
+  columns = ` "id", "first_name", "last_name", "email", "password", "linkedin_url", "github_url", "instagram_url"`;
 
   //Functions
   createFunctionName = 'create_user';
   updateFunctionName = 'update_user';
+  userIdentity = 'user_identity';
 
   //& Find user by email
-  async findUser(email: string) {
+  async findUserIdentity(email: string) {
     if (this.client instanceof pg.Pool) {
       const preparedQuery = {
         text: `
-            SELECT ${this.columns} FROM "${this.tableName}"
-            WHERE "email" = $1;
-            `,
+                SELECT * FROM "${this.userIdentity}"($1);
+                `,
         values: [email]
       };
 

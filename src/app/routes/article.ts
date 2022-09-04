@@ -8,10 +8,10 @@ import { createArticle, fetchAllArticles, fetchOneArticle, updateArticle, delete
 router.post('/api/v1/articles', createArticle);
 
 router.get('/api/v1/articles', fetchAllArticles);
-router.get('/api/v1/articles/:articleId', fetchOneArticle);
+router.get('/api/v1/articles/:articleId(\\d+)', fetchOneArticle);
 
-router.patch('/api/v1/articles/:articleId', updateArticle);
-router.delete('/api/v1/articles/:articleId', deleteArticle);
+router.patch('/api/v1/articles/:articleId(\\d+)', updateArticle);
+router.delete('/api/v1/articles/:articleId(\\d+)', deleteArticle);
 
 
 //~ Export router

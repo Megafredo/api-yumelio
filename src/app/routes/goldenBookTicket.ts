@@ -9,8 +9,8 @@ router.post('/api/v1/gb-tickets', createGoldenBookTicket);
 
 router.get('/api/v1/gb-tickets', fetchAllGoldenBookTickets);
 
-router.patch('/api/v1/gb-tickets/:gbTicketId', updateGoldenBookTicket);
-router.delete('/api/v1/gb-tickets/:gbTicketId', deleteGoldenBookTicket);
+router.patch('/api/v1/gb-tickets/:gbTicketId(\\d+)', updateGoldenBookTicket);
+router.delete('/api/v1/gb-tickets/:gbTicketId(\\d+)', deleteGoldenBookTicket);
 
 //~ Export router
 export { router };

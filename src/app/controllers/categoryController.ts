@@ -32,18 +32,4 @@ function deleteCategory(req: Request, res: Response) {
   }
 }
 
-async function fetchAllCategories(req: Request, res: Response) {
-  try {
-  } catch (err) {
-    if (err instanceof Error) logger(err.message);
-  }
-}
-
-async function fetchAllCategories(req: Request, res: Response) {
-  try {
-  } catch (err) {
-    if (err instanceof Error) logger(err.message);
-  }
-}
-
 export { createCategory, fetchAllCategories, updateCategory, deleteCategory };

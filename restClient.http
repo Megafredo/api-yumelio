@@ -1,8 +1,9 @@
 @entryPoint = http://localhost:4100/api/v1
 
-@accessToken = Authorization: Bearer 
+@accessToken = Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxMiwiZmlyc3RfbmFtZSI6Ill1bWVkb2VlZWUiLCJsYXN0X25hbWUiOiJZdW1lZG8iLCJlbWFpbCI6Inl1bWVkb0BzdXJ2aXZvci5jb20iLCJsaW5rZWRpbl91cmwiOm51bGwsImdpdGh1Yl91cmwiOm51bGwsImluc3RhZ3JhbV91cmwiOm51bGwsInJvbGUiOiJhZG1pbiJ9LCJpYXQiOjE2NjIyOTU2NDIsImV4cCI6MTY2MjM4MjA0Mn0.vNRdUXVbXnGCHYZtby8uR6V86YkFMCMXSnQ9DrDk5-s
 
-@refreshToken = Authorization: Bearer 
+
+@refreshToken = Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxMiwiZmlyc3RfbmFtZSI6Ill1bWVkb2VlZWUiLCJsYXN0X25hbWUiOiJZdW1lZG8iLCJlbWFpbCI6Inl1bWVkb0BzdXJ2aXZvci5jb20iLCJsaW5rZWRpbl91cmwiOm51bGwsImdpdGh1Yl91cmwiOm51bGwsImluc3RhZ3JhbV91cmwiOm51bGwsInJvbGUiOiJhZG1pbiJ9LCJpYXQiOjE2NjIyOTU2NDIsImV4cCI6MTY2MjQ2ODQ0Mn0.JQreDdNdpNSSs0bpMTR1_YojJmaJ1oV3pe1IILnuqm4
 
 
 #& -----------------------------------------------
@@ -39,35 +40,35 @@ Content-Type: application/json
 {{refreshToken}}
 
 
-#^ ------------------------ fetchAllUsers
-###
-GET {{entryPoint}}/users
-Content-Type: application/json
-
-
 #^ ------------------------ fetchOneUser
 ###
-GET {{entryPoint}}/users/5
+GET {{entryPoint}}/users/12
 Content-Type: application/json
 {{accessToken}}
 
 
 #^ ------------------------ updateUser
 ###
-PATCH {{entryPoint}}/users/11
+PATCH {{entryPoint}}/users/12
 Content-Type: application/json
 {{accessToken}}
 
 {
-    "username": "Yumedo",
+    "first_name": "Yumedoeeee"
 }
 
 
 #^ ------------------------ deleteUser
 ###
-DELETE {{entryPoint}}/users/13
+DELETE {{entryPoint}}/users/11
 Content-Type: application/json
 {{accessToken}}
+
+#^ ------------------------ refreshToken
+###
+POST {{entryPoint}}/refreshToken
+Content-Type: application/json
+{{refreshToken}}
 
 #& -----------------------------------------------
 #~ --------------------------------------- ARTICLE
