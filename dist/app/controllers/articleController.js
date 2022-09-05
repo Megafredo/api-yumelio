@@ -4,14 +4,13 @@ const logger = debug('Controller');
 import { Article, User } from '../datamappers/index.js';
 async function createArticle(req, res) {
     try {
-        const { user_id } = req.body;
-        if (isNaN(user_id))
-            throw new ErrorApi(`Id must be a number`, req, res, 400);
-        const userExist = await User.findOne(user_id);
+        const isUser = req.user?.id;
+        const userExist = await User.findOne(isUser);
         if (!userExist)
             throw new ErrorApi(`User doesn't exist`, req, res, 400);
-        if (req.user?.id !== userExist.id)
+        if (isUser !== userExist.id)
             throw new ErrorApi(`Given informations not allows any modification`, req, res, 403);
+        req.body = { ...req.body, user_id: isUser };
         const articleCreated = await Article.create(req.body);
         if (!articleCreated)
             throw new ErrorApi(`No data found !`, req, res, 400);
@@ -63,6 +62,23 @@ async function fetchOneArticleByUser(req, res) {
 }
 async function updateArticle(req, res) {
     try {
+        const isUser = req.user?.id;
+        const user = await User.findOne(isUser);
+        if (!user)
+            throw new ErrorApi(`User doesn't exist`, req, res, 400);
+        const articleId = +req.params.articleId;
+        if (isNaN(articleId))
+            throw new ErrorApi(`Id must be a number`, req, res, 400);
+        const oneArticle = await Article.findOneByUser(isUser, articleId);
+        if (!oneArticle)
+            throw new ErrorApi(`Article doesn't exist`, req, res, 400);
+        if (isUser === user.id && req.user?.role === 'admin') {
+            req.body = { ...req.body, user_id: isUser, id: articleId };
+            await Article.update(req.body);
+            res.status(200).json(`Article successfully updated !`);
+        }
+        else
+            throw new ErrorApi(`You cannot access this info, go away !`, req, res, 400);
     }
     catch (err) {
         if (err instanceof Error)
@@ -71,6 +87,22 @@ async function updateArticle(req, res) {
 }
 async function deleteArticle(req, res) {
     try {
+        const isUser = req.user?.id;
+        const user = await User.findOne(isUser);
+        if (!user)
+            throw new ErrorApi(`User doesn't exist`, req, res, 400);
+        const articleId = +req.params.articleId;
+        if (isNaN(articleId))
+            throw new ErrorApi(`Id must be a number`, req, res, 400);
+        const article = await Article.findOneByUser(isUser, articleId);
+        if (!article)
+            throw new ErrorApi(`Article doesn't exist`, req, res, 400);
+        if (isUser === user.id && req.user?.role === 'admin') {
+            await Article.delete(articleId);
+            return res.status(200).json(`Article successfully deleted`);
+        }
+        else
+            throw new ErrorApi(`You cannot access this info, go away !`, req, res, 400);
     }
     catch (err) {
         if (err instanceof Error)

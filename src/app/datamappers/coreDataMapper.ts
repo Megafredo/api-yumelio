@@ -47,7 +47,7 @@ class CoreDataMapper {
   }
 
   //& FindOne
-  async findOne(id: number) {
+  async findOne(id: number | undefined) {
     if (this.client instanceof pg.Pool) {
       const preparedQuery = {
         text: `
