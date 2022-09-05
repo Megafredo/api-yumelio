@@ -151,22 +151,14 @@ async function deleteUser(req: Request, res: Response) {
     const user = await User.findOne(userId);
     if (!user) throw new ErrorApi(`User doesn't exist`, req, res, 400);
 
-    console.log(req.user)
 
     const isUser = req.user?.id;
     //only the user that want to access his info can or admin
     if (isUser === userId || req.user?.role === 'admin') {
       await User.delete(userId);
-
-      console.log("-----------------------------");
-      console.log("req.user: ", req.user);
-      console.log("req.session: ", req.session);
-      console.log("-----------------------------");
+  
       req.user = null;
       req.session.destroy();
-      console.log("req.user: ", req.user);
-      console.log("req.session: ", req.session);
-      console.log("-----------------------------");
   
       return res.status(200).json(`User successfully deleted`);
   }

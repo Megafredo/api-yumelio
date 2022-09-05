@@ -9,6 +9,8 @@ interface CoreDataMapper {
 
   allProjectsWithCategories:string;
   userIdentity: string;
+  articlesByUser: string;
+  articleByUser: string;
 }
 
 class CoreDataMapper {

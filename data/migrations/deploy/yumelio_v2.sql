@@ -49,7 +49,7 @@ VALUES
 (
         ($1 ->> 'title')::TEXT,
         ($1 ->> 'abstract')::TEXT,
-        ($1 ->> 'content')::TEXT
+        ($1 ->> 'content')::TEXT,
         ($1 ->> 'user_id')::INTEGER
 );
     RETURN QUERY 

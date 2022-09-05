@@ -28,8 +28,8 @@
 
 |Method| Route| Description| Returns|Page|
 |---|---|---|---|---|
-| GET | /articles |  |  | |
-| GET | /articles/:articleId | |  | |
+| GET | /users/:userId/articles |  |  | |
+| GET | /users/:userId/articles/:articleId | |  | |
 | POST | /articles | |  | |
 | PATCH | /articles/:articleId |  |  |  |
 | DELETE | /articles/:articleId |  |  |  |

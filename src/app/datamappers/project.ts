@@ -5,7 +5,7 @@ import pg from 'pg';
 
 class ProjectDataMapper extends CoreDataMapper {
   tableName = 'project';
-  columns = `'id', 'title', 'abstract', 'content', 'picture', 'is_active', 'date', 'link'`;
+  columns = `"id", "title", "abstract", "content", "picture", "is_active", "date",'"link"`;
 
   //Functions
   createFunctionName = 'create_project';

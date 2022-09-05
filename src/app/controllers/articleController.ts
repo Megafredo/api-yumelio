@@ -4,33 +4,90 @@ import { Request, Response } from 'express';
 //~ Import Debug
 import debug from 'debug';
 const logger = debug('Controller');
+//~ Import Datamapper
+import { Article, User } from '../datamappers/index.js';
 
+//~ Controllers
 async function createArticle(req: Request, res: Response) {
   try {
+
+    //~ Is id a number ?
+    const { user_id } = req.body;
+    if (isNaN(user_id)) throw new ErrorApi(`Id must be a number`, req, res, 400);
+
+    //~ User exist ?
+    const userExist = await User.findOne(user_id);
+    if (!userExist) throw new ErrorApi(`User doesn't exist`, req, res, 400);
+
+    if (req.user?.id !== userExist.id) throw new ErrorApi(`Given informations not allows any modification`, req, res, 403);
+
+    //~ Is article created ?
+    const articleCreated = await Article.create(req.body);
+
+    if (!articleCreated) throw new ErrorApi(`No data found !`, req, res, 400);
+
+    return res.status(201).json('Article successfully created !');
+
+
   } catch (err) {
     if (err instanceof Error) logger(err.message);
   }
 }
 
-async function fetchAllArticles(req: Request, res: Response) {
+async function fetchAllArticlesByUser(req: Request, res: Response) {
   try {
+    //check don't forget to add the correct ID !!!!!!!!!!!!!!
+    //~ Is id a number ?
+    const userId = +req.params.userId;
+    if (isNaN(userId)) throw new ErrorApi(`Id must be a number`, req, res, 400);
+
+    //~ User exist ?
+    const user = await User.findOne(userId);
+    if (!user) throw new ErrorApi(`User doesn't exist`, req, res, 400);
+
+    const articles = await Article.findAllByUser(userId);
+    if (!articles) throw new ErrorApi(`No article found !`, req, res, 400);
+    return res.status(200).json(articles);
+
   } catch (err) {
     if (err instanceof Error) logger(err.message);
   }
 }
 
-async function fetchOneArticle(req: Request, res: Response) {
+async function fetchOneArticleByUser(req: Request, res: Response) {
   try {
+    //~ Is id a number ?
+    const userId = +req.params.userId;
+    if (isNaN(userId)) throw new ErrorApi(`Id must be a number`, req, res, 400);
+
+    //~ User exist ?
+    const user = await User.findOne(userId);
+    if (!user) throw new ErrorApi(`User doesn't exist`, req, res, 400);
+
+    //~ Is id a number ?
+    const articleId = +req.params.articleId;
+    if (isNaN(articleId)) throw new ErrorApi(`L'id doit être un nombre`, req, res, 400);
+
+
+    //~ Article exist ?
+    const oneArticle = await Article.findOneByUser(userId, articleId);
+    if (!oneArticle) throw new ErrorApi(`No article found !`, req, res, 400);
+
+    return res.status(200).json(oneArticle);
+
+
   } catch (err) {
     if (err instanceof Error) logger(err.message);
   }
 }
+
 async function updateArticle(req: Request, res: Response) {
   try {
   } catch (err) {
     if (err instanceof Error) logger(err.message);
   }
 }
+
 async function deleteArticle(req: Request, res: Response) {
   try {
   } catch (err) {
@@ -38,4 +95,4 @@ async function deleteArticle(req: Request, res: Response) {
   }
 }
 
-export { createArticle, fetchAllArticles, fetchOneArticle, updateArticle, deleteArticle };
+export { createArticle, fetchAllArticlesByUser, fetchOneArticleByUser, updateArticle, deleteArticle };
