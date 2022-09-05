@@ -1,3 +1,4 @@
+-- SQLBook: Code
 -- Verify yumelio:yumelio_v2 on pg
 
 BEGIN;
@@ -37,7 +38,7 @@ SELECT * FROM create_gb_ticket(
 	}
 	');                 
 
-SELECT * FROM category(
+SELECT * FROM create_category(
 '
 	{
 	"name": "Nodejs",

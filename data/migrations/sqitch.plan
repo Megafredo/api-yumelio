@@ -1,8 +1,10 @@
 %syntax-version=1.0.0
 %project=yumelio
 
-yumelio_v1 2022-08-31T16:59:14Z Yumicode <helene.dyn.nguyen@gmail.com> # 01 - Create tables
-yumelio_v2 2022-08-31T18:47:07Z Yumicode <helene.dyn.nguyen@gmail.com> # 02 - Create CREATE functions
-yumelio_v3 2022-09-02T05:01:59Z Yumicode <helene.dyn.nguyen@gmail.com> # 03 - Create UPDATE functions
-yumelio_v4 2022-09-03T07:36:01Z Yumicode <helene.dyn.nguyen@gmail.com> # 04 - Create FETCH functions categories
-yumelio_v5 2022-09-05T05:43:44Z Yumicode <helene.dyn.nguyen@gmail.com> # 05 - Create functions user_identity, articles_by_user, article_by_user
+yumelio_v1 2022-09-05T13:39:22Z megafredo <megafredo@hotmail.com> # 01 - Create tables
+yumelio_v2 2022-09-05T13:39:22Z megafredo <megafredo@hotmail.com> # 02 - Create CREATE functions
+yumelio_v3 2022-09-05T13:39:23Z megafredo <megafredo@hotmail.com> # 03 - Create UPDATE functions
+yumelio_v4 2022-09-05T13:39:24Z megafredo <megafredo@hotmail.com> # 04 - Create FETCH functions categories
+yumelio_v5 2022-09-05T13:39:24Z megafredo <megafredo@hotmail.com> # 05 - Create functions user_identity, articles_by_user, article_by_user
+yumelio_v6 2022-09-05T20:07:11Z megafredo <megafredo@hotmail.com> # 06 - Create function gb_ticket_by_user
+yumelio_v7 2022-09-05T21:01:13Z megafredo <megafredo@hotmail.com> # 07 - Create functions projects_by_user project_by_user

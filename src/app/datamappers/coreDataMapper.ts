@@ -1,4 +1,5 @@
 import pg from 'pg';
+
 interface CoreDataMapper {
   client: object;
   tableName: string;
@@ -11,6 +12,10 @@ interface CoreDataMapper {
   userIdentity: string;
   articlesByUser: string;
   articleByUser: string;
+  goldenBookTicketByUser: string;
+
+  projectsByUser : string;
+  projectByUser : string;
 }
 
 class CoreDataMapper {
@@ -41,7 +46,6 @@ class CoreDataMapper {
       };
 
       const result = await this.client.query(preparedQuery);
-
       return result.rows;
     }
   }

@@ -1,6 +1,7 @@
 //~ Import modules
 import client from '../db/database.js';
 import { CoreDataMapper } from './coreDataMapper.js';
+
 class CategoryDataMapper extends CoreDataMapper {
   tableName = 'category';
   columns = `"id", "name", "logo", "color"`;
@@ -8,6 +9,8 @@ class CategoryDataMapper extends CoreDataMapper {
   //Functions
   createFunctionName = 'create_category';
   updateFunctionName = 'update_category';
+  
+
 
 }
 

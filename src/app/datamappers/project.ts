@@ -1,7 +1,7 @@
 //~ Import modules
+import pg from 'pg';
 import client from '../db/database.js';
 import { CoreDataMapper } from './coreDataMapper.js';
-import pg from 'pg';
 
 class ProjectDataMapper extends CoreDataMapper {
   tableName = 'project';
@@ -10,13 +10,30 @@ class ProjectDataMapper extends CoreDataMapper {
   //Functions
   createFunctionName = 'create_project';
   updateFunctionName = 'update_project';
-  allProjectsWithCategories = 'projects_with_categories';
+  projectsByUser = 'projects_by_user';
+  projectByUser = 'project_by_user';
+
+
+//& Find one article by user
+async findOneByUser(userId: number | undefined, projectId: number | undefined) {
+  if (this.client instanceof pg.Pool) {
+    const preparedQuery = {
+      text: `SELECT * FROM "${this.projectByUser}"($1, $2);`,
+      values: [userId, projectId]
+    };
+
+    const result = await this.client.query(preparedQuery);
+    if (!result.rows[0]) return null;
+    return result.rows;
+  }
+}
 
   //& All Projects With Categories
-  async fetchAllProjectsWithCategories() {
+  async findAllProjectsByUserWithCategories(userId: number | undefined) {
     if (this.client instanceof pg.Pool) {
       const preparedQuery = {
-        text: `SELECT * FROM ${this.allProjectsWithCategories};`
+        text: `SELECT * FROM ${this.projectsByUser}($1);`,
+        values: [userId]
       };
 
       const result = await this.client.query(preparedQuery);

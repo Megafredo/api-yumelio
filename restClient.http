@@ -1,9 +1,9 @@
-@entryPoint = http://localhost:4100/api/v1
+@entryPoint = http://localhost:4101/api/v1
 
-@accessToken = Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxMiwiZmlyc3RfbmFtZSI6Ill1bWVkb2VlZWUiLCJsYXN0X25hbWUiOiJZdW1lZG8iLCJlbWFpbCI6Inl1bWVkb0BzdXJ2aXZvci5jb20iLCJsaW5rZWRpbl91cmwiOm51bGwsImdpdGh1Yl91cmwiOm51bGwsImluc3RhZ3JhbV91cmwiOm51bGwsInJvbGUiOiJhZG1pbiJ9LCJpYXQiOjE2NjIzODIyMDMsImV4cCI6MTY2MjQ2ODYwM30.YM1QKoPzFJaL0KZv48_0yhHNmVp9FjyoNCqXzXTi_Ec
+@accessToken = Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxMiwiZmlyc3RfbmFtZSI6Ill1bWVkb2VlZWUiLCJsYXN0X25hbWUiOiJZdW1lZG8iLCJlbWFpbCI6Inl1bWVkb0BzdXJ2aXZvci5jb20iLCJsaW5rZWRpbl91cmwiOm51bGwsImdpdGh1Yl91cmwiOm51bGwsImluc3RhZ3JhbV91cmwiOm51bGwsInJvbGUiOiJhZG1pbiJ9LCJpYXQiOjE2NjI0MDkyMTIsImV4cCI6MTY2MjQ5NTYxMn0.-LvEdCZE_asPxESmfvtfMeqsWznDPBhtWos6Uz4dWPk
 
 
-@refreshToken = Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxMiwiZmlyc3RfbmFtZSI6Ill1bWVkb2VlZWUiLCJsYXN0X25hbWUiOiJZdW1lZG8iLCJlbWFpbCI6Inl1bWVkb0BzdXJ2aXZvci5jb20iLCJsaW5rZWRpbl91cmwiOm51bGwsImdpdGh1Yl91cmwiOm51bGwsImluc3RhZ3JhbV91cmwiOm51bGwsInJvbGUiOiJhZG1pbiJ9LCJpYXQiOjE2NjIyOTU2NDIsImV4cCI6MTY2MjQ2ODQ0Mn0.JQreDdNdpNSSs0bpMTR1_YojJmaJ1oV3pe1IILnuqm4
+@refreshToken = Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxMiwiZmlyc3RfbmFtZSI6Ill1bWVkb2VlZWUiLCJsYXN0X25hbWUiOiJZdW1lZG8iLCJlbWFpbCI6Inl1bWVkb0BzdXJ2aXZvci5jb20iLCJsaW5rZWRpbl91cmwiOm51bGwsImdpdGh1Yl91cmwiOm51bGwsImluc3RhZ3JhbV91cmwiOm51bGwsInJvbGUiOiJhZG1pbiJ9LCJpYXQiOjE2NjI0MDkyMTIsImV4cCI6MTY2MjU4MjAxMn0.PSG24zqSzXXjBXWDayj9eT46yWmLwLi68Vgfi9pGPh4
 
 
 #& -----------------------------------------------
@@ -124,6 +124,7 @@ Content-Type: application/json
 ###
 POST {{entryPoint}}/projects
 Content-Type: application/json
+{{accessToken}}
 
 {
     "title": "Super projet !",
@@ -137,7 +138,7 @@ Content-Type: application/json
 
 #^ ------------------------ fetchAllProjects
 ###
-GET {{entryPoint}}/projects
+GET {{entryPoint}}/users/9/projects
 Content-Type: application/json
 
 #^ ------------------------ fetchOneProject
@@ -150,6 +151,7 @@ Content-Type: application/json
 ###
 PATCH {{entryPoint}}/projects/1
 Content-Type: application/json
+{{accessToken}}
 
 {
     "title": "Super projet modifié !",
@@ -165,6 +167,7 @@ Content-Type: application/json
 ###
 DELETE {{entryPoint}}/projects/1
 Content-Type: application/json
+{{accessToken}}
 
 #^ ------------------------ fetchAllProjectsWithCategories
 ###
@@ -179,6 +182,7 @@ Content-Type: application/json
 ###
 POST {{entryPoint}}/gb-tickets
 Content-Type: application/json
+{{accessToken}}
 
 {
   "content" : "test"
@@ -188,11 +192,14 @@ Content-Type: application/json
 ###
 GET {{entryPoint}}/gb-tickets
 Content-Type: application/json
+{{accessToken}}
+
 
 #^ ------------------------ updateGoldenBookTicket
 ###
-UPDATE {{entryPoint}}/gb-tickets/1
+PATCH {{entryPoint}}/gb-tickets/21
 Content-Type: application/json
+{{accessToken}}
 
 {
   "content" : "Update ticket"
@@ -200,8 +207,9 @@ Content-Type: application/json
 
 #^ ------------------------ deleteGoldenBookTicket
 ###
-DELETE {{entryPoint}}/gb-tickets/1
+DELETE {{entryPoint}}/gb-tickets/21
 Content-Type: application/json
+{{accessToken}}
 
 
 
@@ -213,6 +221,7 @@ Content-Type: application/json
 ###
 POST {{entryPoint}}/categories
 Content-Type: application/json
+{{accessToken}}
 
 {
   "name" : "test",
@@ -224,19 +233,22 @@ Content-Type: application/json
 ###
 GET {{entryPoint}}/categories
 Content-Type: application/json
+{{accessToken}}
 
 #^ ------------------------ updateCategory
 ###
-PATCH {{entryPoint}}/categories/1
+PATCH {{entryPoint}}/categories/44
 Content-Type: application/json
+{{accessToken}}
 
 {
-  "name" : "test",
+  "name" : "testa",
   "logo" : "svg",
   "color": "#000"
 }
 
 #^ ------------------------ deleteCategory
 ###
-DELETE {{entryPoint}}/categories/1
+DELETE {{entryPoint}}/categories/45
 Content-Type: application/json
+{{accessToken}}

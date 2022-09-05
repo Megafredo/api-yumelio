@@ -7,7 +7,7 @@ import { createProject, fetchAllProjects,fetchOneProject, fetchAllProjectsWithCa
 //~ Home
 router.post('/api/v1/projects', createProject);
 
-router.get('/api/v1/projects', fetchAllProjects);
+router.get('/api/v1/users/:userId/projects', fetchAllProjects);
 router.get('/api/v1/projects/:projectId(\\d+)', fetchOneProject);
 router.get('/api/v1/projects/categories', fetchAllProjectsWithCategories);
 

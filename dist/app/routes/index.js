@@ -8,6 +8,8 @@ import { router as projectRouter } from './project.js';
 router.use(projectRouter);
 import { router as articleRouter } from './article.js';
 router.use(articleRouter);
+import { router as categoryRouter } from './category.js';
+router.use(categoryRouter);
 import { router as goldenBookTicketRouter } from './goldenBookTicket.js';
 router.use(goldenBookTicketRouter);
 export { router };
