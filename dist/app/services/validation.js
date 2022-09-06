@@ -1,15 +1,20 @@
-import { ErrorApi } from "./errorHandler.js";
+import { ErrorApi } from './errorHandler.js';
 import debug from 'debug';
 const logger = debug('Controller');
+import Ajv from 'ajv/dist/jtd.js';
+const ajv = new Ajv();
 const validation = {
     body(schemaCustom) {
         return function (req, res, next) {
-            const { error } = schemaCustom.validate(req.body);
-            if (error) {
-                logger(error);
-                throw new ErrorApi('Donnée non valide', req, res, 400);
+            const validate = ajv.compile(schemaCustom);
+            console.log('validate------------------------------------------------------------------: ', 'TRUC');
+            if (validate(req.body)) {
+                next();
             }
-            next();
+            else {
+                logger(validate.errors);
+                throw new ErrorApi('Data not valid', req, res, 400);
+            }
         };
     }
 };

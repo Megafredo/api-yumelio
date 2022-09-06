@@ -1,4 +1,4 @@
-@entryPoint = http://localhost:4101/api/v1
+@entryPoint = http://localhost:4100/api/v1
 
 @accessToken = Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxMiwiZmlyc3RfbmFtZSI6Ill1bWVkb2VlZWUiLCJsYXN0X25hbWUiOiJZdW1lZG8iLCJlbWFpbCI6Inl1bWVkb0BzdXJ2aXZvci5jb20iLCJsaW5rZWRpbl91cmwiOm51bGwsImdpdGh1Yl91cmwiOm51bGwsImluc3RhZ3JhbV91cmwiOm51bGwsInJvbGUiOiJhZG1pbiJ9LCJpYXQiOjE2NjI0MDkyMTIsImV4cCI6MTY2MjQ5NTYxMn0.-LvEdCZE_asPxESmfvtfMeqsWznDPBhtWos6Uz4dWPk
 
@@ -94,13 +94,13 @@ Content-Type: application/json
 
 #^ ------------------------ fetchOneArticle
 ###
-GET {{entryPoint}}/users/4/articles/2
+GET {{entryPoint}}/users/12/articles/12
 Content-Type: application/json
 {{accessToken}}
 
 #^ ------------------------ updateArticle
 ###
-PATCH {{entryPoint}}/articles/2
+PATCH {{entryPoint}}/articles/12
 Content-Type: application/json
 {{accessToken}}
 
@@ -132,24 +132,23 @@ Content-Type: application/json
     "content": "Ceci est mon projet",
     "picture": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/940.jpg",
     "date": "10 Mars 2022",
-    "user_id": 1,
     "link": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/940.jpg"
 }
 
 #^ ------------------------ fetchAllProjects
 ###
-GET {{entryPoint}}/users/9/projects
+GET {{entryPoint}}/users/12/projects
 Content-Type: application/json
 
 #^ ------------------------ fetchOneProject
 ###
-GET {{entryPoint}}/projects/1
+GET {{entryPoint}}/users/12/projects/14
 Content-Type: application/json
 
 
 #^ ------------------------ updateProject
 ###
-PATCH {{entryPoint}}/projects/1
+PATCH {{entryPoint}}/projects/14
 Content-Type: application/json
 {{accessToken}}
 
@@ -159,13 +158,12 @@ Content-Type: application/json
     "content": "Ceci est mon projet modifié",
     "picture": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/940.jpg",
     "date": "10 Mars 2022",
-    "user_id": 1,
     "link": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/940.jpg"
 }
 
 #^ ------------------------ deleteProject
 ###
-DELETE {{entryPoint}}/projects/1
+DELETE {{entryPoint}}/projects/11
 Content-Type: application/json
 {{accessToken}}
 
@@ -197,7 +195,7 @@ Content-Type: application/json
 
 #^ ------------------------ updateGoldenBookTicket
 ###
-PATCH {{entryPoint}}/gb-tickets/21
+PATCH {{entryPoint}}/gb-tickets/11
 Content-Type: application/json
 {{accessToken}}
 

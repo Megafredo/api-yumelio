@@ -1,1 +1,1 @@
-{"version":3,"file":"goldenBookTicket.schema.js","sourceRoot":"","sources":["../../../src/app/schema/goldenBookTicket.schema.ts"],"names":[],"mappings":""}
+{"version":3,"file":"goldenBookTicket.schema.js","sourceRoot":"","sources":["../../../src/app/schema/goldenBookTicket.schema.ts"],"names":[],"mappings":"AAMA,MAAM,cAAc,GAAmC;IACnD,IAAI,EAAE,QAAQ;IACd,UAAU,EAAE;QACR,OAAO,EAAE,EAAE,IAAI,EAAE,QAAQ,EAAE;KAC9B;IACD,QAAQ,EAAE,CAAC,SAAS,CAAC;IACrB,oBAAoB,EAAE,KAAK;CAC9B,CAAC;AAEF,OAAO,EAAE,cAAc,EAAE,CAAC"}

@@ -2,18 +2,23 @@
 import { Router } from 'express';
 const router = Router();
 
-import { createProject, fetchAllProjects,fetchOneProject, fetchAllProjectsWithCategories, updateProject,deleteProject } from '../controllers/projectController.js';
+import { createProject, fetchAllProjects,fetchOneProject, updateProject,deleteProject } from '../controllers/projectController.js';
+
+import { validateToken } from '../middlewares/validateToken.js';
+import { auth, admin } from '../middlewares/auth.js';
+
+import { projectSchema } from '../schema/project.schema.js';
+import { validate } from '../middlewares/validateSchema.js';
+
 
 //~ Home
-router.post('/api/v1/projects', createProject);
+router.post('/api/v1/projects', validate(projectSchema), [validateToken, auth, admin], createProject);
 
-router.get('/api/v1/users/:userId/projects', fetchAllProjects);
-router.get('/api/v1/projects/:projectId(\\d+)', fetchOneProject);
-router.get('/api/v1/projects/categories', fetchAllProjectsWithCategories);
+router.get('/api/v1/users/:userId(\\d+)/projects', fetchAllProjects);
+router.get('/api/v1/users/:userId(\\d+)/projects/:projectId(\\d+)', fetchOneProject);
 
-router.patch('/api/v1/projects/:projectId(\\d+)', updateProject);
-router.delete('/api/v1/projects/:projectId(\\d+)', deleteProject);
-
+router.patch('/api/v1/projects/:projectId(\\d+)', validate(projectSchema), [validateToken, auth, admin], updateProject);
+router.delete('/api/v1/projects/:projectId(\\d+)', [validateToken, auth, admin], deleteProject);
 
 
 //~ Export router

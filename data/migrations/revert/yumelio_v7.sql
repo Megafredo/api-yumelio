@@ -6,6 +6,6 @@ DROP FUNCTION
 projects_by_user,
 project_by_user;
 
-DROP TYPE project_by_user;
+DROP TYPE project_by_user CASCADE;
 
 COMMIT;

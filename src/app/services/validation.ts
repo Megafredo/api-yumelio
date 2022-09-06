@@ -1,31 +1,35 @@
 //~ Import module
-import { ErrorApi } from "./errorHandler.js";
+import { ErrorApi } from './errorHandler.js';
 //~ Import Debug
 import debug from 'debug';
 const logger = debug('Controller');
+import Ajv, { JTDDataType } from 'ajv/dist/jtd.js';
+const ajv = new Ajv();
 
 import { Request, Response, NextFunction } from 'express';
 
 //~ Validation schema
 const validation = {
-    /**
+  /**
      * 
      * @func schemaCustom
-     * @description On récupère le schéma établi avec le module Joi pour la validation du body 
+     * @description get the schema from AJV
      * @returns 
      */
-    body(schemaCustom:any) {
-      //valid req.body format
-      return function(req:Request, res:Response, next:NextFunction) {
-        const { error } = schemaCustom.validate(req.body);
-        if (error) {
-          logger(error);
-          throw new ErrorApi('Donnée non valide', req, res,400);
-        }
-  
+  body(schemaCustom: any) {
+    //valid req.body format
+    return function(req: Request, res: Response, next: NextFunction) {
+      const validate = ajv.compile(schemaCustom);
+      console.log('validate------------------------------------------------------------------: ', 'TRUC');
+
+      if (validate(req.body)) {
         next();
-      };
-    }
-  };
-  
-  export { validation };
+      } else {
+        logger(validate.errors);
+        throw new ErrorApi('Data not valid', req, res, 400);
+      }
+    };
+  }
+};
+
+export { validation };

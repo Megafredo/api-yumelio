@@ -1,17 +1,6 @@
-import {JSONSchemaType} from "ajv"
-
-interface UserSchema {
-    first_name?: string;
-    last_name?: string;
-    email: string;
-    password: string;
-    passwordConfirm: string;
-    linkedin_url?: string;
-    github_url?: string;
-    instagram_url?: string;
-}
-
-const userSchema: JSONSchemaType<UserSchema> = {
+import Ajv from "ajv";
+const ajv = new Ajv();
+const userSchema = {
     type: "object",
     properties: {
         first_name: { type: "string", nullable: true },
@@ -26,6 +15,14 @@ const userSchema: JSONSchemaType<UserSchema> = {
     required: ["email", "password", "passwordConfirm"],
     additionalProperties: false
 };
-
-
-export { userSchema };
+function validate(req, res, next) {
+    const validate = ajv.compile(userSchema);
+    if (validate(req.body)) {
+        console.log("OK ---------------------------");
+    }
+    else {
+        console.log("ERROR ---------------------------", validate.errors);
+    }
+}
+export { userSchema, validate };
+//# sourceMappingURL=example.schema.js.map

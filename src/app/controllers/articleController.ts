@@ -62,7 +62,7 @@ async function fetchOneArticleByUser(req: Request, res: Response) {
 
     //~ Is id a number ?
     const articleId = +req.params.articleId;
-    if (isNaN(articleId)) throw new ErrorApi(`L'id doit être un nombre`, req, res, 400);
+    if (isNaN(articleId)) throw new ErrorApi(`Id must be a number`, req, res, 400);
 
     //~ Article exist ?
     const oneArticle = await Article.findOneByUser(userId, articleId);
