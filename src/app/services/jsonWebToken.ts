@@ -1,6 +1,7 @@
 //~ Import modules
 import jwt from 'jsonwebtoken';
 import { Request, Response } from 'express';
+import { getRefreshToken } from '../middlewares/getRefreshToken';
 
 
 //~  Jwt Access_Token
@@ -21,8 +22,8 @@ function generateRefreshToken(user:object, req:Request) {
 }
   
 //~  Jwt Refresh_Token
-function refreshToken(req:Request, res:Response) {
-    
+function refreshToken(req: Request, res: Response) {
+      
   if (req.session.refreshToken?.length === 0) {
           
       const user = req.user;

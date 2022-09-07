@@ -11,7 +11,7 @@ import { components } from './swaggerUtils/swaggerComponents.js';
 // import { articleComments, articlesCommentsById, articlesCommentsByUser } from './swaggerEndpoints/articleComment.js';
 
 //users
-// import { users, oneUser } from './swaggerEndpoints/user.js';
+import { signup, signin, signout, refreshToken, oneUser } from './swaggerEndpoints/user.js';
 
 const options = {
   definition: {
@@ -47,14 +47,14 @@ const options = {
 
     // Tous les chemins ( GET / POST / PATCH / DELETE )
     paths: {
-      //   //~ AUTH
-      //   '/signup': signup,
-      //   '/signin': signin,
-      //   '/signout': signout,
-      //   '/refreshToken': refreshToken,
-      //   //~ USERS
-      //   '/users': users,
-      //   '/users/{userId}': oneUser,
+        //~ AUTH
+        '/signup': signup,
+        '/signin': signin,
+        '/signout': signout,
+        '/refreshToken': refreshToken,
+        //~ USERS
+        '/users/{userId}': oneUser,
+
       //   //~ ARTICLES
       //   '/articles': articles,
       //   '/articles/{articleId}': oneArticle,

@@ -52,3 +52,8 @@ Express & Typescript :
 
 - [Request](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/express-session/index.d.ts)
 - [Types and express-session](https://akoskm.com/how-to-use-express-session-with-custom-sessiondata-typescript)
+
+Nodemailer :
+
+-[Nodemailer](https://nodemailer.com/)
+-[Solution after May 30](https://stackoverflow.com/questions/71477637/nodemailer-and-gmail-after-may-30-2022)

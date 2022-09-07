@@ -3,7 +3,7 @@
 @accessToken = Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxMiwiZmlyc3RfbmFtZSI6Ill1bWVkb2VlZWUiLCJsYXN0X25hbWUiOiJZdW1lZG8iLCJlbWFpbCI6Inl1bWVkb0BzdXJ2aXZvci5jb20iLCJsaW5rZWRpbl91cmwiOm51bGwsImdpdGh1Yl91cmwiOm51bGwsImluc3RhZ3JhbV91cmwiOm51bGwsInJvbGUiOiJhZG1pbiJ9LCJpYXQiOjE2NjI0MDkyMTIsImV4cCI6MTY2MjQ5NTYxMn0.-LvEdCZE_asPxESmfvtfMeqsWznDPBhtWos6Uz4dWPk
 
 
-@refreshToken = Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxMiwiZmlyc3RfbmFtZSI6Ill1bWVkb2VlZWUiLCJsYXN0X25hbWUiOiJZdW1lZG8iLCJlbWFpbCI6Inl1bWVkb0BzdXJ2aXZvci5jb20iLCJsaW5rZWRpbl91cmwiOm51bGwsImdpdGh1Yl91cmwiOm51bGwsImluc3RhZ3JhbV91cmwiOm51bGwsInJvbGUiOiJhZG1pbiJ9LCJpYXQiOjE2NjI0MDkyMTIsImV4cCI6MTY2MjU4MjAxMn0.PSG24zqSzXXjBXWDayj9eT46yWmLwLi68Vgfi9pGPh4
+@refreshToken = Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxMiwiZmlyc3RfbmFtZSI6Ill1bWVkb2VlZWUiLCJsYXN0X25hbWUiOiJZdW1lZG8iLCJlbWFpbCI6Inl1bWVkb0BzdXJ2aXZvci5jb20iLCJsaW5rZWRpbl91cmwiOm51bGwsImdpdGh1Yl91cmwiOm51bGwsImluc3RhZ3JhbV91cmwiOm51bGwsInJvbGUiOiJhZG1pbiJ9LCJpYXQiOjE2NjI1Nzk5ODQsImV4cCI6MTY2Mjc1Mjc4NH0.akYqqB95sO-tticpMN1ds4UOil8XMZrRueQLiSAGv1w
 
 
 #& -----------------------------------------------
@@ -18,7 +18,7 @@ Content-Type: application/json
 {
     "first_name": "Yumedo",
     "last_name": "Yumedo",
-    "email": "yumedo@survivor.com",
+    "email": "yumelio.message@gmail.com",
     "password": "N6y$Ozddzt=1aa",
     "passwordConfirm": "N6y$Ozddzt=1aa"
 }

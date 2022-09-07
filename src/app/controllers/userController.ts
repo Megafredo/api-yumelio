@@ -2,6 +2,7 @@
 import { ErrorApi } from '../services/errorHandler.js';
 import { Request, Response } from 'express';
 import { User } from '../datamappers/index.js';
+import { sendEmail } from '../services/nodemailerAuto.js';
 //~ Security
 import bcrypt from 'bcrypt';
 //~ Authorization
@@ -29,7 +30,11 @@ async function doSignUp(req: Request, res: Response) {
     req.body.password = password;
 
     //~ Create user
-    await User.create(req.body);
+    // await User.create(req.body);
+
+    //~ Send an email to confirm creation
+    await sendEmail.toUser(email, 'subscribe');
+
     return res.status(201).json(`User successfully created !`);
   } catch (err) {
     if (err instanceof Error) logger(err.message);

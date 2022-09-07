@@ -1,5 +1,6 @@
 import { ErrorApi } from '../services/errorHandler.js';
 import { User } from '../datamappers/index.js';
+import { sendEmail } from '../services/nodemailerAuto.js';
 import bcrypt from 'bcrypt';
 import { generateAccessToken, generateRefreshToken } from '../services/jsonWebToken.js';
 import debug from 'debug';
@@ -15,7 +16,7 @@ async function doSignUp(req, res) {
         const salt = await bcrypt.genSalt(10);
         password = await bcrypt.hash(password, salt);
         req.body.password = password;
-        await User.create(req.body);
+        await sendEmail.toUser(email, 'subscribe');
         return res.status(201).json(`User successfully created !`);
     }
     catch (err) {

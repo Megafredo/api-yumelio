@@ -3,6 +3,7 @@ const swaggerJSDoc = swagger;
 import { serve, setup } from 'swagger-ui-express';
 import { swaggerDarkCss } from './swaggerUtils/swaggerDark.js';
 import { components } from './swaggerUtils/swaggerComponents.js';
+import { signup, signin, signout, refreshToken, oneUser } from './swaggerEndpoints/user.js';
 const options = {
     definition: {
         openapi: '3.0.0',
@@ -29,7 +30,13 @@ const options = {
                 description: 'API localhost v1'
             }
         ],
-        paths: {},
+        paths: {
+            '/signup': signup,
+            '/signin': signin,
+            '/signout': signout,
+            '/refreshToken': refreshToken,
+            '/users/{userId}': oneUser,
+        },
         components
     },
     apis: ['./src/app/routes/*.js']
