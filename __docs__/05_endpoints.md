@@ -52,3 +52,5 @@
 | POST | /categories |  |  | |
 | PATCH | /categories/:categoryId |  |  |  |
 | DELETE | /categories/:categoryId |  |  |  |
+
+[Previous](./04_mcd-mld-mpd.md) | [Home](../README.md) | [Next](./05_endpoints.md)

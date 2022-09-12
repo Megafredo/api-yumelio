@@ -35,4 +35,4 @@ For PDM, we use the ERD Tool from pgAdmin4
 
 ![PDM](./img/MPD.png)
 
-[Previous](./03_usecase.md) | [Home](../README.md) | [Next](.)
+[Previous](./03_usecase.md) | [Home](../README.md) | [Next](./05_endpoints.md)

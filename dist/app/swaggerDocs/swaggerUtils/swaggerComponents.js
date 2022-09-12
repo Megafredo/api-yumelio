@@ -1,4 +1,4 @@
-import { userInfoReturn, articleInfoReturn, tableSql } from '../swaggerExamples/index.js';
+import { userInfoReturn, articleInfoReturn, projectInfoReturn, tableSql } from '../swaggerExamples/index.js';
 const components = {
     securitySchemes: {
         AccessToken: {
@@ -45,6 +45,13 @@ const components = {
                     properties: {
                         articlesByUser: { properties: articleInfoReturn.articlesByUser },
                         articleByUser: { properties: articleInfoReturn.articleByUser }
+                    }
+                },
+                Project: {
+                    type: 'object',
+                    properties: {
+                        projectsByUser: { properties: projectInfoReturn.projectsByUser },
+                        projectByUser: { properties: projectInfoReturn.projectByUser }
                     }
                 }
             }

@@ -11,13 +11,13 @@ npm init
 And than, install all the packages needed
 
 ```sh
- npm i dotenv pg express-session helmet ajv bcrypt jsonwebtoken swagger-jsdoc swagger-ui-express
+ npm i dotenv pg express-session helmet ajv bcrypt jsonwebtoken swagger-jsdoc swagger-ui-express nodemailer
 ```
 
 And dev dependencies
 
 ```sh
-npm i -D typescript debug jest supertest ts-jest concurrently eslint @types/bcrypt @types/debug @types/express @types/jest @types/supertest @types/express-session @types/pg @types/swagger-jsdoc @types/swagger-ui-express @types/jsonwebtoken @faker-js/faker
+npm i -D typescript debug jest supertest ts-jest concurrently eslint @types/bcrypt @types/debug @types/express @types/jest @types/supertest @types/express-session @types/pg @types/swagger-jsdoc @types/swagger-ui-express @types/jsonwebtoken @faker-js/faker @types/nodemailer
 ```
 
 Without the @types/express, @types/debug packages etc.., there is no way for TypeScript to know about the types of these classes.
@@ -68,16 +68,17 @@ Complete code
 
 ```js
 {
-  "type": "module", // Type to change
+  "type": "module",
   "name": "api-yumelio",
   "version": "1.0.0",
-  "description": "Make an API portfolio, personnal file in which experiences and formation can be shown", // Description to fill
+  "description": "Make an API portfolio, personnal file in which experiences and formation can be shown",
   "main": "dist/index.js",
-  "scripts": { // Script to launch
-    "start:build_🏡": "tsc -w",
-    "start:run_🚀": "nodemon dist/index.js",
-    "start:lint_💥": "eslint . --ext .ts",
-    "start": "concurrently npm:start:* -c green.bold,yellow.bold,blue.bold",
+  "scripts": {
+    "start": "node dist/index.js",
+    "dev:build_🏡": "tsc -w",
+    "dev:run_🚀": "nodemon dist/index.js",
+    "dev:lint_💥": "eslint . --ext .ts",
+    "dev": "concurrently \"npm:dev:*\" -c green.bold,yellow.bold,blue.bold",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watchAll"
   },
   "keywords": [],
@@ -90,17 +91,20 @@ Complete code
     "express-session": "^1.17.3",
     "helmet": "^6.0.0",
     "jsonwebtoken": "^8.5.1",
+    "nodemailer": "^6.7.8",
     "pg": "^8.8.0",
     "swagger-jsdoc": "^6.2.5",
     "swagger-ui-express": "^4.5.0"
   },
   "devDependencies": {
+    "@faker-js/faker": "^7.5.0",
     "@types/bcrypt": "^5.0.0",
     "@types/debug": "^4.1.7",
     "@types/express": "^4.17.13",
     "@types/express-session": "^1.17.5",
     "@types/jest": "^29.0.0",
     "@types/jsonwebtoken": "^8.5.9",
+    "@types/nodemailer": "^6.4.5",
     "@types/pg": "^8.6.5",
     "@types/supertest": "^2.0.12",
     "@types/swagger-jsdoc": "^6.0.1",
@@ -115,11 +119,11 @@ Complete code
     "ts-jest": "^28.0.8",
     "typescript": "^4.8.2"
   },
-  "jest": { // Jest configuration
-      "forceExit": true,
-      "collectCoverage": false,
-      "verbose": true,
-      "detectOpenHandles": false
+  "jest": {
+    "forceExit": true,
+    "collectCoverage": false,
+    "verbose": true,
+    "detectOpenHandles": false
   }
 }
 

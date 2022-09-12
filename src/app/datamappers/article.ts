@@ -13,35 +13,33 @@ class ArticleDataMapper extends CoreDataMapper {
   articlesByUser = 'articles_by_user';
   articleByUser = 'article_by_user';
 
-//& Find all articles by user
-async findAllByUser(userId: number | undefined) {
-  if (this.client instanceof pg.Pool) {
-    const preparedQuery = {
-      text: `SELECT * FROM "${this.articlesByUser}"($1);`,
-      values: [userId]
-    };
+  //& Find all articles by user
+  async findAllByUser(userId: number | undefined) {
+    if (this.client instanceof pg.Pool) {
+      const preparedQuery = {
+        text: `SELECT * FROM "${this.articlesByUser}"($1);`,
+        values: [userId]
+      };
 
-    const result = await this.client.query(preparedQuery);
-    if (!result.rows[0]) return null;
-    return result.rows;
+      const result = await this.client.query(preparedQuery);
+      if (!result.rows[0]) return null;
+      return result.rows;
+    }
   }
-}
 
-//& Find one article by user
-async findOneByUser(userId: number | undefined, articleId: number | undefined) {
-  if (this.client instanceof pg.Pool) {
-    const preparedQuery = {
-      text: `SELECT * FROM "${this.articleByUser}"($1, $2);`,
-      values: [userId, articleId]
-    };
+  //& Find one article by user
+  async findOneByUser(userId: number | undefined, articleId: number | undefined) {
+    if (this.client instanceof pg.Pool) {
+      const preparedQuery = {
+        text: `SELECT * FROM "${this.articleByUser}"($1, $2);`,
+        values: [userId, articleId]
+      };
 
-    const result = await this.client.query(preparedQuery);
-    if (!result.rows[0]) return null;
-    return result.rows[0];
+      const result = await this.client.query(preparedQuery);
+      if (!result.rows[0]) return null;
+      return result.rows[0];
+    }
   }
-}
-
-
 }
 
 const Article = new ArticleDataMapper(client);

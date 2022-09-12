@@ -6,6 +6,7 @@ API Yumelio is an API for creating a portfolio.
 
 - Technologies used for it are :
 
+```
 NodeJS Express Framework
 TypeScript
 Json Web Token & Session
@@ -14,18 +15,28 @@ Dotenv to configure environment variables
 Ajv to create schema
 Helmet for API security
 Swagger for API documentation
+```
 
 - For database :
-PostgreSQL
-pgAdmin4
+
+```
+PostgreSQL (DBSM)
+pgAdmin4 (GUI)
+```
 
 - For versioning :
-Git & GitHub/ GitLab
-Sqitch for database versioning
+
+```
+  Git & GitHub/ GitLab
+  Sqitch for database versioning
+```
 
 - For testing :
-Jest
-Supertest
+
+```
+  Jest
+  Supertest
+```
 
 ## Summary
 
@@ -34,6 +45,8 @@ Supertest
 - [Project](./__docs__/02_project.md)
 - [Use case](./__docs__/03_usecase.md)
 - [CDM - LDM - PDM](./__docs__/04_mcd-mld-mpd.md)
+- [Endpoints](./__docs__/05_endpoints.md)
+
 
 ---
 
@@ -55,5 +68,5 @@ Express & Typescript :
 
 Nodemailer :
 
--[Nodemailer](https://nodemailer.com/)
--[Solution after May 30](https://stackoverflow.com/questions/71477637/nodemailer-and-gmail-after-may-30-2022)
+- [Nodemailer](https://nodemailer.com/) 
+- [Solution after May 30](https://stackoverflow.com/questions/71477637/nodemailer-and-gmail-after-may-30-2022)

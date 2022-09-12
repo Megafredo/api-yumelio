@@ -1,5 +1,5 @@
 //~  Importations examples
-import { userInfoReturn, articleInfoReturn, tableSql } from '../swaggerExamples/index.js';
+import { userInfoReturn, articleInfoReturn, projectInfoReturn, tableSql } from '../swaggerExamples/index.js';
 
 const components = {
     //~ --------------------- Security token
@@ -79,6 +79,17 @@ const components = {
                         articlesByUser: { properties: articleInfoReturn.articlesByUser },
                         // fetchOneArticleByUser
                         articleByUser: { properties: articleInfoReturn.articleByUser }
+                    }
+                },
+
+                //* ------------------
+                Project: {
+                    type: 'object',
+                    properties: {
+                        // fetchAllProjectsByUser
+                        projectsByUser: { properties: projectInfoReturn.projectsByUser },
+                        // fetchOneProjectByUser
+                        projectByUser: { properties: projectInfoReturn.projectByUser }
                     }
                 }
             }
