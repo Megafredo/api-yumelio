@@ -11,7 +11,7 @@ async function createProject(req, res) {
         if (isUser !== userExist.id)
             throw new ErrorApi(`Given informations not allows any modification`, req, res, 403);
         req.body = { ...req.body, user_id: isUser };
-        const projectCreated = await Project.create(req.body);
+        const projectCreated = await Project.createWithCategories(req.body);
         if (!projectCreated)
             throw new ErrorApi(`No data found !`, req, res, 400);
         return res.status(201).json('Project successfully created !');
@@ -74,7 +74,7 @@ async function updateProject(req, res) {
             throw new ErrorApi(`Project doesn't exist`, req, res, 400);
         if (isUser === user.id && req.user?.role === 'admin') {
             req.body = { ...req.body, user_id: isUser, id: projectId };
-            await Project.update(req.body);
+            await Project.updateWithCategories(req.body);
             res.status(200).json(`Project successfully updated !`);
         }
         else

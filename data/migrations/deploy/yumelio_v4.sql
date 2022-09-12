@@ -17,6 +17,7 @@ JSON_AGG(
         'categories', (SELECT JSON_AGG(
             json_build_object
             (
+                'id', C."id",
                 'name',C."name",
                 'logo', C."logo",
                 'color',C."color"

@@ -40,6 +40,7 @@ class ArticleDataMapper extends CoreDataMapper {
       return result.rows[0];
     }
   }
+
 }
 
 const Article = new ArticleDataMapper(client);

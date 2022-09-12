@@ -4,20 +4,24 @@ const projectRequired = {
 };
 const projectExample = {
     createProject: {
-        title: "Super projet !",
-        abstract: "Description de mon projet",
-        content: "Ceci est mon projet",
-        picture: "http://www.myPicture.com",
-        date: "10 Mars 2022",
-        link: "http://www.myLink.com"
+        title: 'Super projet !',
+        abstract: 'Description de mon projet',
+        content: 'Ceci est mon projet',
+        picture: 'http://www.myPicture.com',
+        is_active: true,
+        date: '10 Mars 2022',
+        link: 'http://www.myLink.com',
+        categories: [{ id: 1 }, { id: 3 }, { id: 8 }]
     },
     updateProject: {
-        title: "Super projet modifié !",
-        abstract: "Description de mon projet modifié",
-        content: "Ceci est mon projet modifié",
-        picture: "http://www.myPicture.com",
-        date: "10 Mars 2022",
-        link: "http://www.myLink.com"
+        title: 'Super projet modifié !',
+        abstract: 'Description de mon projet modifié',
+        content: 'Ceci est mon projet modifié',
+        picture: 'http://www.myPicture.com',
+        is_active: true,
+        date: '10 Mars 2022',
+        link: 'http://www.myLink.com',
+        categories: [{ id: 1 }, { id: 3 }, { id: 8 }]
     }
 };
 const projectProperties = {
@@ -26,36 +30,84 @@ const projectProperties = {
         abstract: { type: 'string' },
         content: { type: 'string' },
         picture: { type: 'string' },
+        is_active: { type: 'boolean' },
         date: { type: 'string' },
-        link: { type: 'string' }
+        link: { type: 'string' },
+        categories: {
+            type: 'array',
+            items: {
+                type: 'object',
+                properties: {
+                    name: { type: 'string' },
+                    logo: { type: 'string' },
+                    color: { type: 'string' }
+                }
+            }
+        }
     },
     updateProject: {
         title: { type: 'string' },
         abstract: { type: 'string' },
         content: { type: 'string' },
         picture: { type: 'string' },
+        is_active: { type: 'boolean' },
         date: { type: 'string' },
-        link: { type: 'string' }
+        link: { type: 'string' },
+        categories: {
+            type: 'array',
+            items: {
+                type: 'object',
+                properties: {
+                    name: { type: 'string' },
+                    logo: { type: 'string' },
+                    color: { type: 'string' }
+                }
+            }
+        }
     }
 };
 const projectInfoReturn = {
     projectsByUser: {
-        article_id: { type: 'integer' },
+        project_id: { type: 'integer' },
         title: { type: 'string' },
         abtract: { type: 'string' },
         content: { type: 'string' },
         picture: { type: 'string' },
+        is_active: { type: 'boolean' },
         date: { type: 'string' },
-        link: { type: 'string' }
+        link: { type: 'string' },
+        categories: {
+            type: 'array',
+            items: {
+                type: 'object',
+                properties: {
+                    name: { type: 'string' },
+                    logo: { type: 'string' },
+                    color: { type: 'string' }
+                }
+            }
+        }
     },
     projectByUser: {
-        article_id: { type: 'integer' },
+        project_id: { type: 'integer' },
         title: { type: 'string' },
         abtract: { type: 'string' },
         content: { type: 'string' },
         picture: { type: 'string' },
+        is_active: { type: 'boolean' },
         date: { type: 'string' },
-        link: { type: 'string' }
+        link: { type: 'string' },
+        categories: {
+            type: 'array',
+            items: {
+                type: 'object',
+                properties: {
+                    name: { type: 'string' },
+                    logo: { type: 'string' },
+                    color: { type: 'string' }
+                }
+            }
+        }
     }
 };
 export { projectRequired, projectExample, projectProperties, projectInfoReturn };

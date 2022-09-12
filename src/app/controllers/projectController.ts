@@ -19,7 +19,7 @@ async function createProject(req: Request, res: Response) {
 
     //~ Is project created ?
     req.body = { ...req.body, user_id: isUser };
-    const projectCreated = await Project.create(req.body);
+    const projectCreated = await Project.createWithCategories(req.body);
 
     if (!projectCreated) throw new ErrorApi(`No data found !`, req, res, 400);
 
@@ -98,7 +98,7 @@ async function updateProject(req: Request, res: Response) {
    if (isUser === user.id && req.user?.role === 'admin') {
 
      req.body = { ...req.body, user_id: isUser, id: projectId };
-     await Project.update(req.body);
+     await Project.updateWithCategories(req.body);
      res.status(200).json(`Project successfully updated !`);
    
    }   

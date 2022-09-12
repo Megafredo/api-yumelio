@@ -20,6 +20,7 @@ async function createArticle(req: Request, res: Response) {
 
     //~ Is article created ?
     req.body = { ...req.body, user_id: isUser };
+    // const articleCreated = await Article.create(req.body);
     const articleCreated = await Article.create(req.body);
 
     if (!articleCreated) throw new ErrorApi(`No data found !`, req, res, 400);

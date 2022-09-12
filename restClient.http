@@ -130,9 +130,15 @@ Content-Type: application/json
     "title": "Super projet !",
     "abstract": "Description de mon projet",
     "content": "Ceci est mon projet",
-    "picture": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/940.jpg",
+    "picture": "http://www.myPicture.com",
+    "is_active": true,
     "date": "10 Mars 2022",
-    "link": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/940.jpg"
+    "link": "http://www.myLink.com",
+    "categories": [
+        {"id":3},
+        {"id":6},
+        {"id":1}
+    ]
 }
 
 #^ ------------------------ fetchAllProjects
@@ -142,13 +148,13 @@ Content-Type: application/json
 
 #^ ------------------------ fetchOneProject
 ###
-GET {{entryPoint}}/users/12/projects/21
+GET {{entryPoint}}/users/12/projects/24
 Content-Type: application/json
 
 
 #^ ------------------------ updateProject
 ###
-PATCH {{entryPoint}}/projects/14
+PATCH {{entryPoint}}/projects/24
 Content-Type: application/json
 {{accessToken}}
 
@@ -156,9 +162,15 @@ Content-Type: application/json
     "title": "Super projet modifié !",
     "abstract": "Description de mon projet modifié",
     "content": "Ceci est mon projet modifié",
-    "picture": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/940.jpg",
+    "picture": "http://www.myPicture.com",
+    "is_active": true,
     "date": "10 Mars 2022",
-    "link": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/940.jpg"
+    "link": "http://www.myLink.com",
+    "categories": [
+        {"id":9, "old_category":3},
+        {"id":6},
+        {"id":1}
+    ]
 }
 
 #^ ------------------------ deleteProject

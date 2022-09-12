@@ -8,6 +8,8 @@ class ProjectDataMapper extends CoreDataMapper {
     updateFunctionName = 'update_project';
     projectsByUser = 'projects_by_user';
     projectByUser = 'project_by_user';
+    createWithCategoriesFunctionName = 'add_category_to_project';
+    updateWithCategoriesFunctionName = 'update_project_with_categories';
     async findOneByUser(userId, projectId) {
         if (this.client instanceof pg.Pool) {
             const preparedQuery = {
@@ -28,6 +30,26 @@ class ProjectDataMapper extends CoreDataMapper {
             };
             const result = await this.client.query(preparedQuery);
             return result.rows;
+        }
+    }
+    async createWithCategories(inputData) {
+        if (this.client instanceof pg.Pool) {
+            const preparedQuery = {
+                text: `SELECT * FROM ${this.createWithCategoriesFunctionName}($1);`,
+                values: [inputData]
+            };
+            const result = await this.client.query(preparedQuery);
+            return result.rows[0];
+        }
+    }
+    async updateWithCategories(inputData) {
+        if (this.client instanceof pg.Pool) {
+            const preparedQuery = {
+                text: `SELECT * FROM ${this.updateWithCategoriesFunctionName}($1);`,
+                values: [inputData]
+            };
+            const result = await this.client.query(preparedQuery);
+            return result.rows[0];
         }
     }
 }

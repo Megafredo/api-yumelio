@@ -46,6 +46,7 @@ const articleProperties = {
 const articleInfoReturn = {
     //~ ---------------- All Articles By User
     articlesByUser: {
+        
         article_id: { type: 'integer' },
         title: { type: 'string' },
         abtract: { type: 'string' },

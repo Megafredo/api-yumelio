@@ -16,6 +16,9 @@ interface CoreDataMapper {
 
   projectsByUser : string;
   projectByUser : string;
+
+  createWithCategoriesFunctionName: string;
+  updateWithCategoriesFunctionName: string;
 }
 
 class CoreDataMapper {
