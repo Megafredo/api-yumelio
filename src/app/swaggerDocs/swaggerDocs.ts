@@ -11,7 +11,7 @@ import { components } from './swaggerUtils/swaggerComponents.js';
 // import { articleComments, articlesCommentsById, articlesCommentsByUser } from './swaggerEndpoints/articleComment.js';
 
 //users
-import { signup, signin, signout, refreshToken, oneUser } from './swaggerEndpoints/user.js';
+import { userEndpoints, articleEndpoints, projectEndpoints, categoryEndpoints, goldenBookTicketEndpoints } from './swaggerEndpoints/index.js';
 
 const options = {
   definition: {
@@ -47,28 +47,44 @@ const options = {
 
     // Tous les chemins ( GET / POST / PATCH / DELETE )
     paths: {
-        //~ AUTH
-        '/signup': signup,
-        '/signin': signin,
-        '/signout': signout,
-        '/refreshToken': refreshToken,
-        //~ USERS
-        '/users/{userId}': oneUser,
+      
+      // userEndpoints = signup, signin, signout, refreshToken, oneUser
+      //~ AUTH
+        '/signup': userEndpoints.signup,
+        '/signin': userEndpoints.signin,
+        '/signout': userEndpoints.signout,
+        '/refreshToken': userEndpoints.refreshToken,
+      //~ USERS
+        '/users/{userId}': userEndpoints.oneUser,
 
-      //   //~ ARTICLES
-      //   '/articles': articles,
-      //   '/articles/{articleId}': oneArticle,
-      //   '/categories/{categoryId}/articles': articlesByCategory,
-      //   '/users/{userId}/articles': articlesByUser,
-      //   '/articles/last': lastestArticles,
-      //   '/articles/search': searchAllArticles,
+      //~ ARTICLES
+        '/articles': articleEndpoints.articles,
+        '/users/{userId}/articles': articleEndpoints.articlesByUser,
+        '/users/{userId}/articles/{articleId}': articleEndpoints.articleByUser,
+        '/articles/{articleId}': articleEndpoints.article,
+
+      //~ PROJECTS
+
+      '/projects': projectEndpoints.projects,
+      '/users/{userId}/projects': projectEndpoints.projectsByUser,
+      '/users/{userId}/projects/{projectId}': projectEndpoints.projectByUser,
+      '/projects/{projectId}': projectEndpoints.project,
+
+      //~ CATEGORIES
+
+      //~ GOLDEN BOOK TICKETS
+
+
     },
     // Tous les schemas
-    components
+    components,
+    // security: [
+    //   {
+    //     ApiKeyAuth: []
+    //   }
+    // ],
 
-    // security:{
-    //     ApiKeyAuth:[]
-    // }
+   
   },
 
   apis: ['./src/app/routes/*.js']

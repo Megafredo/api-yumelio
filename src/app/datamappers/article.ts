@@ -37,7 +37,7 @@ async findOneByUser(userId: number | undefined, articleId: number | undefined) {
 
     const result = await this.client.query(preparedQuery);
     if (!result.rows[0]) return null;
-    return result.rows;
+    return result.rows[0];
   }
 }
 

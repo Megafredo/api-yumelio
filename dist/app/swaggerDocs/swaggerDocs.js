@@ -3,7 +3,7 @@ const swaggerJSDoc = swagger;
 import { serve, setup } from 'swagger-ui-express';
 import { swaggerDarkCss } from './swaggerUtils/swaggerDark.js';
 import { components } from './swaggerUtils/swaggerComponents.js';
-import { signup, signin, signout, refreshToken, oneUser } from './swaggerEndpoints/user.js';
+import { userEndpoints, articleEndpoints, projectEndpoints } from './swaggerEndpoints/index.js';
 const options = {
     definition: {
         openapi: '3.0.0',
@@ -31,13 +31,21 @@ const options = {
             }
         ],
         paths: {
-            '/signup': signup,
-            '/signin': signin,
-            '/signout': signout,
-            '/refreshToken': refreshToken,
-            '/users/{userId}': oneUser,
+            '/signup': userEndpoints.signup,
+            '/signin': userEndpoints.signin,
+            '/signout': userEndpoints.signout,
+            '/refreshToken': userEndpoints.refreshToken,
+            '/users/{userId}': userEndpoints.oneUser,
+            '/articles': articleEndpoints.articles,
+            '/users/{userId}/articles': articleEndpoints.articlesByUser,
+            '/users/{userId}/articles/{articleId}': articleEndpoints.articleByUser,
+            '/articles/{articleId}': articleEndpoints.article,
+            '/projects': projectEndpoints.projects,
+            '/users/{userId}/projects': projectEndpoints.projectsByUser,
+            '/users/{userId}/projects/{projectId}': projectEndpoints.projectByUser,
+            '/projects/{projectId}': projectEndpoints.project,
         },
-        components
+        components,
     },
     apis: ['./src/app/routes/*.js']
 };

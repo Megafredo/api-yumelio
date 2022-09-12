@@ -1,4 +1,4 @@
-import { example as e, properties as p, required as r } from '../swaggerExamples/userExample.js';
+import { userExample as e, userProperties as p, userRequired as r } from '../swaggerExamples/index.js';
 import { statusCode } from '../swaggerUtils/swaggerStatus.js';
 const signup = {
     post: {
@@ -92,7 +92,7 @@ const refreshToken = {
 const oneUser = {
     get: {
         tags: ['Users'],
-        summary: `Récupération d'un utilisateur par son id`,
+        summary: `Retrieving a user by his id`,
         security: [
             {
                 AccessToken: []
@@ -107,7 +107,7 @@ const oneUser = {
                     type: 'integer',
                     example: 1
                 },
-                description: `Identifiant d'un utilisateur`
+                description: `User ID`
             }
         ],
         responses: {
@@ -119,7 +119,7 @@ const oneUser = {
     },
     patch: {
         tags: ['Users'],
-        summary: `Mise à jour des informations d'un utilisateur`,
+        summary: `Updating User Information`,
         security: [
             {
                 AccessToken: []
@@ -134,7 +134,7 @@ const oneUser = {
                     type: 'integer',
                     example: 11
                 },
-                description: `Identifiant d'un utilisateur`
+                description: `User ID`
             }
         ],
         requestBody: {
@@ -148,7 +148,7 @@ const oneUser = {
                         properties: p.updateUser,
                         example: e.updateUser
                     },
-                    description: 'Info body pour générer un utilisateur'
+                    description: 'Info body to generate a user'
                 }
             }
         },
@@ -161,7 +161,7 @@ const oneUser = {
     },
     delete: {
         tags: ['Users'],
-        summary: `Suppression d'un utilisateur`,
+        summary: `Deleting a user by his Id`,
         security: [
             {
                 AccessToken: []
@@ -176,7 +176,7 @@ const oneUser = {
                     type: 'integer',
                     example: 1
                 },
-                description: `Identifiant d'un utilisateur`
+                description: `User ID`
             }
         ],
         responses: {

@@ -92,7 +92,7 @@ async function updateArticle(req: Request, res: Response) {
     if (!oneArticle) throw new ErrorApi(`Article doesn't exist`, req, res, 400);
 
     if (isUser === user.id && req.user?.role === 'admin') {
-
+    
       req.body = { ...req.body, user_id: isUser, id: articleId };
       await Article.update(req.body);
       res.status(200).json(`Article successfully updated !`);

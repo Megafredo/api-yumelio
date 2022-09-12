@@ -1,5 +1,5 @@
 //& ----------------------------------------- REQUIRED
-const required = {
+const userRequired = {
 
     //~ ---------------- User
     signUp: ['username', 'email', 'password', 'passwordConfirm'],
@@ -9,7 +9,7 @@ const required = {
 
 
 //& ----------------------------------------- EXAMPLE
-const example = {
+const userExample = {
     //~ ---------------- SignUp
     signUp: {
       first_name: 'Yumedo',
@@ -56,7 +56,7 @@ const example = {
 
 
 //& ----------------------------------------- PROPERTIES
-const properties = {
+const userProperties = {
     //~ ---------------- SignUp
     signUp: {
       first_name: { type: 'string' },
@@ -104,28 +104,11 @@ const properties = {
 
 
 
-//& ---------------- Tables SQL
-const tableSql = {
-    //~ ---------------- Table User
-    user: {
-      id: { type: 'INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY' },
-      first_name: { type: 'TEXT NULL' },
-      last_name: { type: 'TEXT NULL' },
-      email: { type: 'EMAIL NOT NULL UNIQUE' },
-      password: { type: 'PWD NOT NULL' },
-      linkedin_url: { type: 'LINK_URL NULL' },
-      github_url: { type: 'LINK_URL NULL' },
-      instagram_url: { type: 'LINK_URL NULL' },
-      role_id: { type: 'INTEGER NOT NULL DEFAULT 3' }
-    }
-}
-
-
 //& ---------------- Info return
-const infoReturn = {
+const userInfoReturn = {
 
   //~ ---------------- One User
-  oneUser: {
+  fetchOneUser: {
     id: { type: 'integer' },
     first_name: { type: 'string' },
     last_name: { type: 'string' },
@@ -140,16 +123,19 @@ const infoReturn = {
     first_name: { type: 'string' },
     last_name: { type: 'string' },
     email: { type: 'string' },
+    linkedin_url: { type: 'string' },
+    github_url: { type: 'string' },
+    instagram_url: { type: 'string' },
+    role: { type: 'string' },
     accessToken: { type: 'string' },
     refreshToken: { type: 'string' }
   },
 }
 
 export {
-    required,
-    example,
-    properties,
-    tableSql,
-    infoReturn
+    userRequired,
+    userExample,
+    userProperties,
+    userInfoReturn
   };
   

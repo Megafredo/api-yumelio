@@ -63,6 +63,7 @@ async function fetchOneUser(req, res) {
         const user = await User.findOne(userId);
         if (!user)
             throw new ErrorApi(`User doesn't exist`, req, res, 400);
+        delete user['password'];
         return res.status(200).json(user);
     }
     catch (err) {

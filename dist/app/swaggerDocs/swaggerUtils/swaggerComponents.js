@@ -1,16 +1,16 @@
-import { infoReturn as i, tableSql } from '../swaggerExamples/userExample.js';
+import { userInfoReturn, articleInfoReturn, tableSql } from '../swaggerExamples/index.js';
 const components = {
     securitySchemes: {
         AccessToken: {
-            type: 'apiKey',
-            scheme: 'bearer',
+            type: 'http',
+            scheme: 'Bearer',
             name: 'Authorization',
             bearerFormat: 'JWT',
             in: 'header'
         },
         RefreshToken: {
-            type: 'apiKey',
-            scheme: 'bearer',
+            type: 'http',
+            scheme: 'Bearer',
             name: 'Authorization',
             bearerFormat: 'JWT',
             in: 'header'
@@ -21,6 +21,13 @@ const components = {
             type: 'object',
             properties: {
                 User: { properties: tableSql.user },
+                Article: { properties: tableSql.article },
+                Role: { properties: tableSql.role },
+                Project: { properties: tableSql.project },
+                Gb_Ticket: { properties: tableSql.gbTicket },
+                Category: { properties: tableSql.category },
+                Project_has_category: { properties: tableSql.project_has_category },
+                Article_has_category: { properties: tableSql.article_has_category }
             }
         },
         INFO_RETURN: {
@@ -29,10 +36,17 @@ const components = {
                 User: {
                     type: 'object',
                     properties: {
-                        OneUser: { properties: i.oneUser },
-                        SignInUser: { properties: i.signInUser }
+                        fetchOneUser: { properties: userInfoReturn.fetchOneUser },
+                        SignInUser: { properties: userInfoReturn.signInUser }
                     }
                 },
+                Article: {
+                    type: 'object',
+                    properties: {
+                        articlesByUser: { properties: articleInfoReturn.articlesByUser },
+                        articleByUser: { properties: articleInfoReturn.articleByUser }
+                    }
+                }
             }
         },
         StatusCode_Errors: {
