@@ -10,23 +10,28 @@ function baseConvertSvg(categories: object) {
   return convert;
 }
 
+interface Categories {
+  categories: object;
+}
 
 //& Convert svg for Fetch all categories by article || project
-// function baseConvertSvgByElement(categoriesData) {
-//   let categories = [];
-//   let { category } = categoriesData[0];
+function baseConvertSvgByElement(projectData: object[] | any) {
+  let projects = [];
+  let { categories }: Categories = projectData[0];
 
-//   const convert = [];
-//   for (let [k, value] of Object.entries(category)) {
-//     const category_name = value.category_name;
-//     const logo = Buffer.from(value.logo, 'base64').toString('utf-8');
-//     convert.push({ category_name, logo });
-//   }
+  const convert = [];
+  for (let [k, value ] of Object.entries(categories)) {
+    const id = value.id;
+    const name = value.name;
+    const color = value.color;
+    const logo = Buffer.from(value.logo, 'base64').toString('utf-8');
+    convert.push({ id, name, logo, color });
+  }
 
-//   categoriesData[0] = { ...categoriesData[0], category: convert };
-//   categories.push(categoriesData[0]);
+  projectData[0] = { ...projectData[0], categories: convert };
+  projects.push(projectData[0]);
 
-//   return categories;
-// }
+  return projects;
+}
 
-export { baseConvertSvg };
+export { baseConvertSvg, baseConvertSvgByElement };

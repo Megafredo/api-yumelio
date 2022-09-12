@@ -16,6 +16,7 @@ async function doSignUp(req, res) {
         const salt = await bcrypt.genSalt(10);
         password = await bcrypt.hash(password, salt);
         req.body.password = password;
+        await User.create(req.body);
         await sendEmail.toUser(email, 'subscribe');
         return res.status(201).json(`User successfully created !`);
     }
@@ -114,6 +115,7 @@ async function deleteUser(req, res) {
             await User.delete(userId);
             req.user = null;
             req.session.destroy();
+            await sendEmail.toUser(user.email, 'unsubscribe');
             return res.status(200).json(`User successfully deleted`);
         }
         else

@@ -69,4 +69,15 @@ Express & Typescript :
 Nodemailer :
 
 - [Nodemailer](https://nodemailer.com/) 
-- [Solution after May 30](https://stackoverflow.com/questions/71477637/nodemailer-and-gmail-after-may-30-2022)
+- [Solution after May 30 with GoogleMail](https://stackoverflow.com/questions/71477637/nodemailer-and-gmail-after-may-30-2022)
+
+PostgreSQL : 
+
+- [Upsert data](https://www.prisma.io/dataguide/postgresql/inserting-and-modifying-data/insert-on-conflict)
+- [Update or Insert](https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-upsert/)
+
+Convert SVG : 
+
+- [Btoa convert SVG into base64 explained](https://www.w3schools.com/jsref/met_win_btoa.asp)
+- [Convert SVG](https://thewebdev.info/2021/08/28/how-to-convert-inline-svg-to-base64-string-with-javascript/)
+- [File to SVG](https://developer.mozilla.org/fr/docs/Web/API/FileReader/readAsDataURL)

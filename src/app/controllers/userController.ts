@@ -30,7 +30,7 @@ async function doSignUp(req: Request, res: Response) {
     req.body.password = password;
 
     //~ Create user
-    // await User.create(req.body);
+    await User.create(req.body);
 
     //~ Send an email to confirm creation
     await sendEmail.toUser(email, 'subscribe');
@@ -158,14 +158,17 @@ async function deleteUser(req: Request, res: Response) {
     const user = await User.findOne(userId);
     if (!user) throw new ErrorApi(`User doesn't exist`, req, res, 400);
 
-
     const isUser = req.user?.id;
     //only the user that want to access his info can or admin
     if (isUser === userId || req.user?.role === 'admin') {
+
       await User.delete(userId);
   
       req.user = null;
       req.session.destroy();
+
+      //~ Send an email to confirm creation
+      await sendEmail.toUser(user.email, 'unsubscribe');
   
       return res.status(200).json(`User successfully deleted`);
   }

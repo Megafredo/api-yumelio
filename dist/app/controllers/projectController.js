@@ -1,6 +1,7 @@
 import { ErrorApi } from '../services/errorHandler.js';
 import debug from 'debug';
 const logger = debug('Controller');
+import { baseConvertSvgByElement } from '../utils/baseConvertSvg.js';
 import { Project, User } from '../datamappers/index.js';
 async function createProject(req, res) {
     try {
@@ -32,7 +33,8 @@ async function fetchAllProjects(req, res) {
         const project = await Project.findAllProjectsByUserWithCategories(userId);
         if (!project)
             throw new ErrorApi(`No article found !`, req, res, 400);
-        return res.status(200).json(project);
+        const result = baseConvertSvgByElement(project);
+        return res.status(200).json(result);
     }
     catch (err) {
         if (err instanceof Error)
@@ -53,7 +55,8 @@ async function fetchOneProject(req, res) {
         const oneProject = await Project.findOneByUser(userId, projectId);
         if (!oneProject)
             throw new ErrorApi(`No Project found !`, req, res, 400);
-        return res.status(200).json(oneProject);
+        const result = baseConvertSvgByElement([oneProject]);
+        return res.status(200).json(result);
     }
     catch (err) {
         if (err instanceof Error)

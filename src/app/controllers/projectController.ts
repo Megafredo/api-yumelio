@@ -3,6 +3,7 @@ import { ErrorApi } from '../services/errorHandler.js';
 import debug from 'debug';
 const logger = debug('Controller');
 import { Request, Response } from 'express';
+import {baseConvertSvgByElement} from '../utils/baseConvertSvg.js';
 //~ Import Datamapper
 import { Project, User } from '../datamappers/index.js';
 
@@ -42,8 +43,14 @@ async function fetchAllProjects(req: Request, res: Response) {
    if (!user) throw new ErrorApi(`User doesn't exist`, req, res, 400);
  
      const project = await Project.findAllProjectsByUserWithCategories(userId);
-     if (!project) throw new ErrorApi(`No article found !`, req, res, 400);
-     return res.status(200).json(project);
+    if (!project) throw new ErrorApi(`No article found !`, req, res, 400);
+  
+
+//~Convert logo category into base64
+    const result = baseConvertSvgByElement(project);
+    
+    return res.status(200).json(result);
+  
      
   } catch (err) {
     if (err instanceof Error) logger(err.message);
@@ -70,7 +77,10 @@ async function fetchOneProject(req: Request, res: Response) {
  const oneProject = await Project.findOneByUser(userId, projectId);
  if (!oneProject) throw new ErrorApi(`No Project found !`, req, res, 400);
 
- return res.status(200).json(oneProject);
+ //~Convert logo category into base64
+ const result = baseConvertSvgByElement([oneProject]);
+    
+ return res.status(200).json(result);
 
   } catch (err) {
     if (err instanceof Error) logger(err.message);

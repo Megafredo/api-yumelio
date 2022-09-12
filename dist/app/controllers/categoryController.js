@@ -1,4 +1,5 @@
 import { ErrorApi } from '../services/errorHandler.js';
+import { baseConvertSvg } from '../utils/baseConvertSvg.js';
 import debug from 'debug';
 const logger = debug('Controller');
 import { Category } from '../datamappers/index.js';
@@ -20,10 +21,11 @@ async function createCategory(req, res) {
 }
 async function fetchAllCategories(req, res) {
     try {
-        const articles = await Category.findAll();
-        if (!articles)
+        const categories = await Category.findAll();
+        if (!categories)
             throw new ErrorApi(`No category found !`, req, res, 400);
-        return res.status(200).json(articles);
+        const result = baseConvertSvg(categories);
+        return res.status(200).json(result);
     }
     catch (err) {
         if (err instanceof Error)
