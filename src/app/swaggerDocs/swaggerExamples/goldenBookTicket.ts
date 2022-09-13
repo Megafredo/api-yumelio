@@ -18,6 +18,13 @@ const goldenBookTicketExample = {
 
 const goldenBookTicketProperties = {
 
+    createGoldenBookTicket: {
+        content : { type: 'string' }
+    },
+    updateGoldenBookTicket: {
+        content : { type: 'string' }
+    },
+
 };
 
 const goldenBookTicketInfoReturn = {
