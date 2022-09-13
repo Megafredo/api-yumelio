@@ -71,8 +71,12 @@ const options = {
       '/projects/{projectId}': projectEndpoints.project,
 
       //~ CATEGORIES
+      '/categories': categoryEndpoints.categories,
+      '/categories/{categoryId}': categoryEndpoints.category,
 
       //~ GOLDEN BOOK TICKETS
+      '/gb-tickets': goldenBookTicketEndpoints.goldenBookTickets,
+      '/gb-tickets/{gbTicketId}': goldenBookTicketEndpoints.goldenBookTicket,
 
 
     },

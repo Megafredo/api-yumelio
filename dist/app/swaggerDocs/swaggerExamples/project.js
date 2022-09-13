@@ -1,6 +1,6 @@
 const projectRequired = {
     createProject: ['title', 'abstract', 'content', 'picture', 'date'],
-    updateProject: ['user_id']
+    updateProject: ['id', 'user_id']
 };
 const projectExample = {
     createProject: {
@@ -21,7 +21,7 @@ const projectExample = {
         is_active: true,
         date: '10 Mars 2022',
         link: 'http://www.myLink.com',
-        categories: [{ id: 1 }, { id: 3 }, { id: 8 }]
+        categories: [{ id: 10, old_category: 1 }, { id: 3 }, { id: 8 }]
     }
 };
 const projectProperties = {
@@ -38,9 +38,7 @@ const projectProperties = {
             items: {
                 type: 'object',
                 properties: {
-                    name: { type: 'string' },
-                    logo: { type: 'string' },
-                    color: { type: 'string' }
+                    id: { type: 'integer' }
                 }
             }
         }
@@ -58,9 +56,8 @@ const projectProperties = {
             items: {
                 type: 'object',
                 properties: {
-                    name: { type: 'string' },
-                    logo: { type: 'string' },
-                    color: { type: 'string' }
+                    id: { type: 'integer' },
+                    old_category: { type: 'integer' }
                 }
             }
         }
@@ -81,6 +78,7 @@ const projectInfoReturn = {
             items: {
                 type: 'object',
                 properties: {
+                    id: { type: 'integer' },
                     name: { type: 'string' },
                     logo: { type: 'string' },
                     color: { type: 'string' }
@@ -102,6 +100,7 @@ const projectInfoReturn = {
             items: {
                 type: 'object',
                 properties: {
+                    id: { type: 'integer' },
                     name: { type: 'string' },
                     logo: { type: 'string' },
                     color: { type: 'string' }

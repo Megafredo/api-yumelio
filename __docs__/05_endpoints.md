@@ -1,4 +1,6 @@
-## Endpoints
+# Endpoints
+
+You'll find here all of the endpoints for the application.
 
 ## /API/V1
 

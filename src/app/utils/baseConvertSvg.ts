@@ -4,8 +4,9 @@ function baseConvertSvg(categories: object) {
   for (let [k, value] of Object.entries(categories)) {
     const id = value.id;
     const name = value.name;
+    const color = value.color;
     const logo = Buffer.from(value.logo, 'base64').toString('utf-8');
-    convert.push({ id, name, logo });
+    convert.push({ id, name, logo, color });
   }
   return convert;
 }

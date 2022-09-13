@@ -383,6 +383,8 @@ background-color: transparent;
 .swagger-ui .model {
     color: #1e2f46;
     font-weight: 600;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 .swagger-ui section.models.is-open {

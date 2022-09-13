@@ -3,7 +3,7 @@ const swaggerJSDoc = swagger;
 import { serve, setup } from 'swagger-ui-express';
 import { swaggerDarkCss } from './swaggerUtils/swaggerDark.js';
 import { components } from './swaggerUtils/swaggerComponents.js';
-import { userEndpoints, articleEndpoints, projectEndpoints } from './swaggerEndpoints/index.js';
+import { userEndpoints, articleEndpoints, projectEndpoints, categoryEndpoints, goldenBookTicketEndpoints } from './swaggerEndpoints/index.js';
 const options = {
     definition: {
         openapi: '3.0.0',
@@ -44,6 +44,10 @@ const options = {
             '/users/{userId}/projects': projectEndpoints.projectsByUser,
             '/users/{userId}/projects/{projectId}': projectEndpoints.projectByUser,
             '/projects/{projectId}': projectEndpoints.project,
+            '/categories': categoryEndpoints.categories,
+            '/categories/{categoryId}': categoryEndpoints.category,
+            '/gb-tickets': goldenBookTicketEndpoints.goldenBookTickets,
+            '/gb-tickets/{gbTicketId}': goldenBookTicketEndpoints.goldenBookTicket,
         },
         components,
     },

@@ -1,13 +1,25 @@
-# Server
+# Entrypoint
+
+The entrypoint here is the file where your server will start.
+
+It's commonly called `index.js`, `server.js` or `app.js`. Whatever the name, it's THE point.
+
+For this API, we use Typescript. Everything was coded in `index.ts` file and thanks to the compiler, we find our `index.js` in the dist folder.
+
+![structure](./img/structure.png)
+
+## Structure
 
 To configure the server and to launch the application, you have to :
 
 - import dotenv for configure environment variables
 - import express framework for the API
 - import routes to define each URL, return a 404 page if it's not found
-- debug for log any error and debugging
-- import swagger for aPI documentation
+- import debug for log any error and debugging
+- import Swagger for API documentation
 - import helmet for data and identity security
+- Set the header to configure the [CORS](https://developer.mozilla.org/fr/docs/Web/HTTP/CORS) to share the resources
+
 
 ```js
 //~ Dotenv
@@ -35,7 +47,7 @@ const logger = debug('EntryPoint');
 import { specs, serve, setup, cssOptions } from './app/swaggerDocs/swaggerDocs.js';
 app.use('/api-docs', serve, setup(specs, cssOptions));
 
-//~ Encoding
+//~ Encoding parsing the body
 //accept Content-type: application/json
 app.use(express.json());
 // accept Content-type: application/x-www-form-urlencoded
@@ -64,14 +76,15 @@ app.set('trust proxy', 1);
 import session from 'express-session';
 app.use(
   session({
-    saveUninitialized: true,
-    resave: true,
-    proxy: true,
-    secret: process.env.SESSION_SECRET!,
+    saveUninitialized: true, //Forces a session that is “uninitialized” to be saved to the store. A session is uninitialized when it is new but not modified
+    resave: true, //Forces the session to be saved back to the session store, even if the session was never modified during the request
+    proxy: true, //Trust the reverse proxy when setting secure cookies (via the “X-Forwarded-Proto” header).
+    //The default value is undefined.
+    secret: process.env.SESSION_SECRET!, //required to sign the session ID cookie
     cookie: {
-      httpOnly: true,
-      secure: true,
-      sameSite: 'lax', // or 'strict'
+      httpOnly: true, // Be careful when setting this to true, as compliant clients will not allow client-side JavaScript to see the cookie in document.cookie
+      secure: true, //will not send the cookie back to the server in the future if the browser does not have an HTTPS connection
+      sameSite: 'lax', // or 'strict' - The "SameSite" attribute limits the scope of the cookie
       maxAge: 24 * 60 * 60 * 1000 //24 hours
       //expires : new Date(Date.now() + 60 * 60 * 1000) //1 hour
     }
@@ -96,3 +109,7 @@ if (process.env.NODE_ENV !== 'test') {
 }
 
 ```
+
+___
+
+[Previous](./05_endpoints.md) | [Home](../README.md) | [Next](./07_structure.md)

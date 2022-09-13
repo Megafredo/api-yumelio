@@ -23,7 +23,7 @@ const logger = debug('EntryPoint');
 import { specs, serve, setup, cssOptions } from './app/swaggerDocs/swaggerDocs.js';
 app.use('/api-docs', serve, setup(specs, cssOptions));
 
-//~ Encoding
+//~ Encoding parsing the body
 //accept Content-type: application/json
 app.use(express.json());
 // accept Content-type: application/x-www-form-urlencoded

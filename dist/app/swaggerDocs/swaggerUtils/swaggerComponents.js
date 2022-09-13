@@ -1,4 +1,4 @@
-import { userInfoReturn, articleInfoReturn, projectInfoReturn, tableSql } from '../swaggerExamples/index.js';
+import { userInfoReturn, articleInfoReturn, projectInfoReturn, categoryInfoReturn, goldenBookTicketInfoReturn, tableSql } from '../swaggerExamples/index.js';
 const components = {
     securitySchemes: {
         AccessToken: {
@@ -52,6 +52,18 @@ const components = {
                     properties: {
                         projectsByUser: { properties: projectInfoReturn.projectsByUser },
                         projectByUser: { properties: projectInfoReturn.projectByUser }
+                    }
+                },
+                Category: {
+                    type: 'object',
+                    properties: {
+                        allCategories: { properties: categoryInfoReturn.allCategories }
+                    }
+                },
+                GoldenBookTicket: {
+                    type: 'object',
+                    properties: {
+                        allGoldenBookTickets: { properties: goldenBookTicketInfoReturn.allGoldenBookTickets }
                     }
                 }
             }
