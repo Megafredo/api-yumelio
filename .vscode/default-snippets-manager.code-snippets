@@ -1,0 +1,22 @@
+{
+	"helmet": {
+		"prefix": "helmet",
+		"description": "helmet",
+		"scope": "typescript",
+		"body": [
+			"//~ Protect API Helmet\r",
+			"import helmet from 'helmet';\r",
+			"app.use(helmet());"
+		]
+	},
+	"express": {
+		"prefix": "express",
+		"description": "express",
+		"scope": "typescript",
+		"body": [
+			"//~ Import Express\r",
+			"import express, { Request, Response } from 'express';\r",
+			"const app = express();"
+		]
+	}
+}

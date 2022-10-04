@@ -11,7 +11,7 @@ import { Article, User } from '../datamappers/index.js';
 async function createArticle(req: Request, res: Response) {
   try {
     const isUser = req.user?.id;
-    
+
     //~ User exist ?
     const userExist = await User.findOne(isUser);
     if (!userExist) throw new ErrorApi(`User doesn't exist`, req, res, 400);
@@ -34,11 +34,11 @@ async function createArticle(req: Request, res: Response) {
 async function fetchAllArticlesByUser(req: Request, res: Response) {
   try {
     //check don't forget to add the correct ID !!!!!!!!!!!!!!
-    
+
     //~ Is id a number ?
     const userId = +req.params.userId;
     if (isNaN(userId)) throw new ErrorApi(`Id must be a number`, req, res, 400);
-    
+
     //~ User exist ?
     const user = await User.findOne(userId);
     if (!user) throw new ErrorApi(`User doesn't exist`, req, res, 400);
@@ -77,12 +77,12 @@ async function fetchOneArticleByUser(req: Request, res: Response) {
 
 async function updateArticle(req: Request, res: Response) {
   try {
-      //~ Is id a number ?
-      const isUser = req.user?.id;
-  
-      //~ User exist ?
-      const user = await User.findOne(isUser);
-      if (!user) throw new ErrorApi(`User doesn't exist`, req, res, 400);
+    //~ Is id a number ?
+    const isUser = req.user?.id;
+
+    //~ User exist ?
+    const user = await User.findOne(isUser);
+    if (!user) throw new ErrorApi(`User doesn't exist`, req, res, 400);
 
     //~ Is id a number ?
     const articleId = +req.params.articleId;
@@ -93,13 +93,13 @@ async function updateArticle(req: Request, res: Response) {
     if (!oneArticle) throw new ErrorApi(`Article doesn't exist`, req, res, 400);
 
     if (isUser === user.id && req.user?.role === 'admin') {
-    
+
       req.body = { ...req.body, user_id: isUser, id: articleId };
       await Article.update(req.body);
       res.status(200).json(`Article successfully updated !`);
-    
-    }   
-    else throw new ErrorApi(`You cannot access this info, go away !`, req, res, 400);   
+
+    }
+    else throw new ErrorApi(`You cannot access this info, go away !`, req, res, 400);
 
   } catch (err) {
     if (err instanceof Error) logger(err.message);
@@ -126,7 +126,7 @@ async function deleteArticle(req: Request, res: Response) {
     if (isUser === user.id && req.user?.role === 'admin') {
       await Article.delete(articleId)
       return res.status(200).json(`Article successfully deleted`);
-    }   
+    }
     else throw new ErrorApi(`You cannot access this info, go away !`, req, res, 400);
 
   } catch (err) {
