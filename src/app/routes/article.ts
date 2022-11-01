@@ -20,4 +20,4 @@ router.patch('/api/v1/articles/:articleId(\\d+)', validate(articleSchema), [vali
 router.delete('/api/v1/articles/:articleId(\\d+)', [validateToken, auth, admin], deleteArticle);
 
 //~ Export router
-export { router };
+export { router }; 

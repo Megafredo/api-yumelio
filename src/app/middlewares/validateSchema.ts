@@ -11,6 +11,7 @@ import { Request, Response, NextFunction } from 'express';
 
 
 function validate(schemaCustom: any) { 
+    
     return function validateCheck(req: Request, res: Response, next: NextFunction) {
         const validate = ajv.compile(schemaCustom);
     

@@ -19,4 +19,4 @@ You can find :
 
 ---
 
-[Previous](./00_start.md) | [Home](../README.md) | [Next](./02.md)
+[Previous](./00_start.md) | [Home](../README.md) | [Next](./02_project.md)
