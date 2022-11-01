@@ -1,6 +1,6 @@
 import debug from 'debug';
 const logger = debug('Controller');
-function renderHomePage(req, res) {
+const renderHomePage = (req, res) => {
     try {
         res.json({
             message: 'Welcome to Yumelio API'
@@ -10,6 +10,6 @@ function renderHomePage(req, res) {
         if (err instanceof Error)
             logger(err.message);
     }
-}
+};
 export { renderHomePage };
 //# sourceMappingURL=mainController.js.map

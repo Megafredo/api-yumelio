@@ -13,7 +13,7 @@ import debug from 'debug';
 const logger = debug('Controller');
 
 //~Controllers
-async function doSignUp(req: Request, res: Response) {
+const doSignUp = async (req: Request, res: Response) => {
   try {
     let { email, password, passwordConfirm } = req.body;
 
@@ -39,9 +39,9 @@ async function doSignUp(req: Request, res: Response) {
   } catch (err) {
     if (err instanceof Error) logger(err.message);
   }
-}
+};
 
-async function doSignIn(req: Request, res: Response) {
+const doSignIn = async (req: Request, res: Response) => {
   try {
     let { email, password } = req.body;
 
@@ -67,9 +67,9 @@ async function doSignIn(req: Request, res: Response) {
   } catch (err) {
     if (err instanceof Error) logger(err.message);
   }
-}
+};
 
-async function doSignOut(req: Request, res: Response) {
+const doSignOut = async (req: Request, res: Response) => {
   try {
     req.user = null;
     req.session.destroy();
@@ -78,7 +78,7 @@ async function doSignOut(req: Request, res: Response) {
   } catch (err) {
     if (err instanceof Error) logger(err.message);
   }
-}
+};
 
 // async function fetchAllUsers(req: Request, res: Response) {
 //   try {
@@ -92,7 +92,7 @@ async function doSignOut(req: Request, res: Response) {
 //   }
 // }
 
-async function fetchOneUser(req: Request, res: Response) {
+const fetchOneUser = async (req: Request, res: Response) => {
   try {
     const userId = +req.params.userId;
     if (isNaN(userId)) throw new ErrorApi(`Id must be a number`, req, res, 400);
@@ -107,9 +107,9 @@ async function fetchOneUser(req: Request, res: Response) {
   } catch (err) {
     if (err instanceof Error) logger(err.message);
   }
-}
+};
 
-async function updateUser(req: Request, res: Response) {
+const updateUser = async (req: Request, res: Response) => {
   try {
     let { password, passwordConfirm } = req.body;
 
@@ -146,9 +146,9 @@ async function updateUser(req: Request, res: Response) {
   } catch (err) {
     if (err instanceof Error) logger(err.message);
   }
-}
+};
 
-async function deleteUser(req: Request, res: Response) {
+const deleteUser = async (req: Request, res: Response) => {
   try {
     //~ Is id a number ?
     const userId = +req.params.userId;
@@ -161,22 +161,19 @@ async function deleteUser(req: Request, res: Response) {
     const isUser = req.user?.id;
     //only the user that want to access his info can or admin
     if (isUser === userId || req.user?.role === 'admin') {
-
       await User.delete(userId);
-  
+
       req.user = null;
       req.session.destroy();
 
       //~ Send an email to confirm creation
       await sendEmail.toUser(user.email, 'unsubscribe');
-  
+
       return res.status(200).json(`User successfully deleted`);
-  }
-    else throw new ErrorApi(`You cannot access this info, go away !`, req, res, 400);
-   
+    } else throw new ErrorApi(`You cannot access this info, go away !`, req, res, 400);
   } catch (err) {
     if (err instanceof Error) logger(err.message);
   }
-}
+};
 
 export { doSignUp, doSignIn, doSignOut, fetchOneUser, updateUser, deleteUser };

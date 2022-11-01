@@ -10,7 +10,14 @@ const goldenBookTicketExample = {
         content: "Mon super commentaire modifié pour le golden book !"
     }
 };
-const goldenBookTicketProperties = {};
+const goldenBookTicketProperties = {
+    createGoldenBookTicket: {
+        content: { type: 'string' }
+    },
+    updateGoldenBookTicket: {
+        content: { type: 'string' }
+    },
+};
 const goldenBookTicketInfoReturn = {
     allGoldenBookTickets: {
         id: { type: 'integer' },
