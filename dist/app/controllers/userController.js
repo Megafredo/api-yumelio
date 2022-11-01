@@ -5,7 +5,7 @@ import bcrypt from 'bcrypt';
 import { generateAccessToken, generateRefreshToken } from '../services/jsonWebToken.js';
 import debug from 'debug';
 const logger = debug('Controller');
-async function doSignUp(req, res) {
+const doSignUp = async (req, res) => {
     try {
         let { email, password, passwordConfirm } = req.body;
         const userExist = await User.findUserIdentity(email);
@@ -24,8 +24,8 @@ async function doSignUp(req, res) {
         if (err instanceof Error)
             logger(err.message);
     }
-}
-async function doSignIn(req, res) {
+};
+const doSignIn = async (req, res) => {
     try {
         let { email, password } = req.body;
         const userExist = await User.findUserIdentity(email);
@@ -44,8 +44,8 @@ async function doSignIn(req, res) {
         if (err instanceof Error)
             logger(err.message);
     }
-}
-async function doSignOut(req, res) {
+};
+const doSignOut = async (req, res) => {
     try {
         req.user = null;
         req.session.destroy();
@@ -55,8 +55,8 @@ async function doSignOut(req, res) {
         if (err instanceof Error)
             logger(err.message);
     }
-}
-async function fetchOneUser(req, res) {
+};
+const fetchOneUser = async (req, res) => {
     try {
         const userId = +req.params.userId;
         if (isNaN(userId))
@@ -71,8 +71,8 @@ async function fetchOneUser(req, res) {
         if (err instanceof Error)
             logger(err.message);
     }
-}
-async function updateUser(req, res) {
+};
+const updateUser = async (req, res) => {
     try {
         let { password, passwordConfirm } = req.body;
         const userId = +req.params.userId;
@@ -101,8 +101,8 @@ async function updateUser(req, res) {
         if (err instanceof Error)
             logger(err.message);
     }
-}
-async function deleteUser(req, res) {
+};
+const deleteUser = async (req, res) => {
     try {
         const userId = +req.params.userId;
         if (isNaN(userId))
@@ -125,6 +125,6 @@ async function deleteUser(req, res) {
         if (err instanceof Error)
             logger(err.message);
     }
-}
+};
 export { doSignUp, doSignIn, doSignOut, fetchOneUser, updateUser, deleteUser };
 //# sourceMappingURL=userController.js.map

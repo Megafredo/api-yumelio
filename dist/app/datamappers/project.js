@@ -29,6 +29,8 @@ class ProjectDataMapper extends CoreDataMapper {
                 values: [userId]
             };
             const result = await this.client.query(preparedQuery);
+            if (!result.rows[0])
+                return null;
             return result.rows;
         }
     }

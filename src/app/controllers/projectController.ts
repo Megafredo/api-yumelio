@@ -8,7 +8,8 @@ import { baseConvertSvgByElement } from '../utils/baseConvertSvg.js';
 import { Project, User } from '../datamappers/index.js';
 
 //~ Controller
-async function createProject(req: Request, res: Response) {
+
+const createProject = async (req: Request, res: Response) => {
   try {
     const isUser = req.user?.id;
 
@@ -28,12 +29,10 @@ async function createProject(req: Request, res: Response) {
   } catch (err) {
     if (err instanceof Error) logger(err.message);
   }
-}
+};
 
-
-async function fetchAllProjects(req: Request, res: Response) {
+const fetchAllProjects = async (req: Request, res: Response) => {
   try {
-
     //~ Is id a number ?
     const userId = +req.params.userId;
     if (isNaN(userId)) throw new ErrorApi(`Id must be a number`, req, res, 400);
@@ -43,24 +42,19 @@ async function fetchAllProjects(req: Request, res: Response) {
     if (!user) throw new ErrorApi(`User doesn't exist`, req, res, 400);
 
     const project = await Project.findAllProjectsByUserWithCategories(userId);
-    if (!project) throw new ErrorApi(`No article found !`, req, res, 400);
-
+    if (!project) throw new ErrorApi(`No Project found !`, req, res, 400);
 
     //~Convert logo category into base64
     const result = baseConvertSvgByElement(project);
 
     return res.status(200).json(result);
-
-
   } catch (err) {
     if (err instanceof Error) logger(err.message);
   }
-}
+};
 
-
-async function fetchOneProject(req: Request, res: Response) {
+const fetchOneProject = async (req: Request, res: Response) => {
   try {
-
     //~ Is id a number ?
     const userId = +req.params.userId;
     if (isNaN(userId)) throw new ErrorApi(`Id must be a number`, req, res, 400);
@@ -81,15 +75,13 @@ async function fetchOneProject(req: Request, res: Response) {
     const result = baseConvertSvgByElement([oneProject]);
 
     return res.status(200).json(result);
-
   } catch (err) {
     if (err instanceof Error) logger(err.message);
   }
-}
+};
 
-async function updateProject(req: Request, res: Response) {
+const updateProject = async (req: Request, res: Response) => {
   try {
-
     //~ Is id a number ?
     const isUser = req.user?.id;
 
@@ -106,21 +98,17 @@ async function updateProject(req: Request, res: Response) {
     if (!oneProject) throw new ErrorApi(`Project doesn't exist`, req, res, 400);
 
     if (isUser === user.id && req.user?.role === 'admin') {
-
       req.body = { ...req.body, user_id: isUser, id: projectId };
       await Project.updateWithCategories(req.body);
       res.status(200).json(`Project successfully updated !`);
-
-    }
-    else throw new ErrorApi(`You cannot access this info, go away !`, req, res, 400);
-
+    } else throw new ErrorApi(`You cannot access this info, go away !`, req, res, 400);
   } catch (err) {
     if (err instanceof Error) logger(err.message);
   }
-}
-async function deleteProject(req: Request, res: Response) {
-  try {
+};
 
+const deleteProject = async (req: Request, res: Response) => {
+  try {
     //~ Is id a number ?
     const isUser = req.user?.id;
 
@@ -137,15 +125,12 @@ async function deleteProject(req: Request, res: Response) {
     if (!oneProject) throw new ErrorApi(`Project doesn't exist`, req, res, 400);
 
     if (isUser === user.id && req.user?.role === 'admin') {
-      await Project.delete(projectId)
+      await Project.delete(projectId);
       return res.status(200).json(`Project successfully deleted`);
-    }
-    else throw new ErrorApi(`You cannot access this info, go away !`, req, res, 400);
-
-
+    } else throw new ErrorApi(`You cannot access this info, go away !`, req, res, 400);
   } catch (err) {
     if (err instanceof Error) logger(err.message);
   }
-}
+};
 
 export { createProject, fetchAllProjects, fetchOneProject, updateProject, deleteProject };

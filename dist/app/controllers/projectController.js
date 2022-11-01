@@ -3,7 +3,7 @@ import debug from 'debug';
 const logger = debug('Controller');
 import { baseConvertSvgByElement } from '../utils/baseConvertSvg.js';
 import { Project, User } from '../datamappers/index.js';
-async function createProject(req, res) {
+const createProject = async (req, res) => {
     try {
         const isUser = req.user?.id;
         const userExist = await User.findOne(isUser);
@@ -21,8 +21,8 @@ async function createProject(req, res) {
         if (err instanceof Error)
             logger(err.message);
     }
-}
-async function fetchAllProjects(req, res) {
+};
+const fetchAllProjects = async (req, res) => {
     try {
         const userId = +req.params.userId;
         if (isNaN(userId))
@@ -32,7 +32,7 @@ async function fetchAllProjects(req, res) {
             throw new ErrorApi(`User doesn't exist`, req, res, 400);
         const project = await Project.findAllProjectsByUserWithCategories(userId);
         if (!project)
-            throw new ErrorApi(`No article found !`, req, res, 400);
+            throw new ErrorApi(`No Project found !`, req, res, 400);
         const result = baseConvertSvgByElement(project);
         return res.status(200).json(result);
     }
@@ -40,8 +40,8 @@ async function fetchAllProjects(req, res) {
         if (err instanceof Error)
             logger(err.message);
     }
-}
-async function fetchOneProject(req, res) {
+};
+const fetchOneProject = async (req, res) => {
     try {
         const userId = +req.params.userId;
         if (isNaN(userId))
@@ -62,8 +62,8 @@ async function fetchOneProject(req, res) {
         if (err instanceof Error)
             logger(err.message);
     }
-}
-async function updateProject(req, res) {
+};
+const updateProject = async (req, res) => {
     try {
         const isUser = req.user?.id;
         const user = await User.findOne(isUser);
@@ -87,8 +87,8 @@ async function updateProject(req, res) {
         if (err instanceof Error)
             logger(err.message);
     }
-}
-async function deleteProject(req, res) {
+};
+const deleteProject = async (req, res) => {
     try {
         const isUser = req.user?.id;
         const user = await User.findOne(isUser);
@@ -111,6 +111,6 @@ async function deleteProject(req, res) {
         if (err instanceof Error)
             logger(err.message);
     }
-}
+};
 export { createProject, fetchAllProjects, fetchOneProject, updateProject, deleteProject };
 //# sourceMappingURL=projectController.js.map

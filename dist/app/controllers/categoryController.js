@@ -3,7 +3,7 @@ import { baseConvertSvg } from '../utils/baseConvertSvg.js';
 import debug from 'debug';
 const logger = debug('Controller');
 import { Category } from '../datamappers/index.js';
-async function createCategory(req, res) {
+const createCategory = async (req, res) => {
     try {
         if (req.user?.role === 'admin') {
             const categoryCreated = await Category.create(req.body);
@@ -18,8 +18,8 @@ async function createCategory(req, res) {
         if (err instanceof Error)
             logger(err.message);
     }
-}
-async function fetchAllCategories(req, res) {
+};
+const fetchAllCategories = async (req, res) => {
     try {
         const categories = await Category.findAll();
         if (!categories)
@@ -31,8 +31,8 @@ async function fetchAllCategories(req, res) {
         if (err instanceof Error)
             logger(err.message);
     }
-}
-async function updateCategory(req, res) {
+};
+const updateCategory = async (req, res) => {
     try {
         const categoryId = +req.params.categoryId;
         if (isNaN(categoryId))
@@ -52,8 +52,8 @@ async function updateCategory(req, res) {
         if (err instanceof Error)
             logger(err.message);
     }
-}
-async function deleteCategory(req, res) {
+};
+const deleteCategory = async (req, res) => {
     try {
         const categoryId = +req.params.categoryId;
         if (isNaN(categoryId))
@@ -72,6 +72,6 @@ async function deleteCategory(req, res) {
         if (err instanceof Error)
             logger(err.message);
     }
-}
+};
 export { createCategory, fetchAllCategories, updateCategory, deleteCategory };
 //# sourceMappingURL=categoryController.js.map

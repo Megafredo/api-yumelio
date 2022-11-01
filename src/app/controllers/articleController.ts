@@ -8,7 +8,7 @@ const logger = debug('Controller');
 import { Article, User } from '../datamappers/index.js';
 
 //~ Controllers
-async function createArticle(req: Request, res: Response) {
+const createArticle = async (req: Request, res: Response) => {
   try {
     const isUser = req.user?.id;
 
@@ -29,9 +29,9 @@ async function createArticle(req: Request, res: Response) {
   } catch (err) {
     if (err instanceof Error) logger(err.message);
   }
-}
+};
 
-async function fetchAllArticlesByUser(req: Request, res: Response) {
+const fetchAllArticlesByUser = async (req: Request, res: Response) => {
   try {
     //check don't forget to add the correct ID !!!!!!!!!!!!!!
 
@@ -49,9 +49,9 @@ async function fetchAllArticlesByUser(req: Request, res: Response) {
   } catch (err) {
     if (err instanceof Error) logger(err.message);
   }
-}
+};
 
-async function fetchOneArticleByUser(req: Request, res: Response) {
+const fetchOneArticleByUser = async (req: Request, res: Response) => {
   try {
     //~ Is id a number ?
     const userId = +req.params.userId;
@@ -73,9 +73,9 @@ async function fetchOneArticleByUser(req: Request, res: Response) {
   } catch (err) {
     if (err instanceof Error) logger(err.message);
   }
-}
+};
 
-async function updateArticle(req: Request, res: Response) {
+const updateArticle = async (req: Request, res: Response) => {
   try {
     //~ Is id a number ?
     const isUser = req.user?.id;
@@ -93,20 +93,16 @@ async function updateArticle(req: Request, res: Response) {
     if (!oneArticle) throw new ErrorApi(`Article doesn't exist`, req, res, 400);
 
     if (isUser === user.id && req.user?.role === 'admin') {
-
       req.body = { ...req.body, user_id: isUser, id: articleId };
       await Article.update(req.body);
       res.status(200).json(`Article successfully updated !`);
-
-    }
-    else throw new ErrorApi(`You cannot access this info, go away !`, req, res, 400);
-
+    } else throw new ErrorApi(`You cannot access this info, go away !`, req, res, 400);
   } catch (err) {
     if (err instanceof Error) logger(err.message);
   }
-}
+};
 
-async function deleteArticle(req: Request, res: Response) {
+const deleteArticle = async (req: Request, res: Response) => {
   try {
     //~ Is id a number ?
     const isUser = req.user?.id;
@@ -124,14 +120,12 @@ async function deleteArticle(req: Request, res: Response) {
     if (!article) throw new ErrorApi(`Article doesn't exist`, req, res, 400);
 
     if (isUser === user.id && req.user?.role === 'admin') {
-      await Article.delete(articleId)
+      await Article.delete(articleId);
       return res.status(200).json(`Article successfully deleted`);
-    }
-    else throw new ErrorApi(`You cannot access this info, go away !`, req, res, 400);
-
+    } else throw new ErrorApi(`You cannot access this info, go away !`, req, res, 400);
   } catch (err) {
     if (err instanceof Error) logger(err.message);
   }
-}
+};
 
 export { createArticle, fetchAllArticlesByUser, fetchOneArticleByUser, updateArticle, deleteArticle };

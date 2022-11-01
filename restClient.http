@@ -1,6 +1,6 @@
 @entryPoint = http://localhost:4100/api/v1
 
-@accessToken = Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxMiwiZmlyc3RfbmFtZSI6Ill1bWVkb2VlZWUiLCJsYXN0X25hbWUiOiJZdW1lZG8iLCJlbWFpbCI6Inl1bWVkb0BzdXJ2aXZvci5jb20iLCJsaW5rZWRpbl91cmwiOm51bGwsImdpdGh1Yl91cmwiOm51bGwsImluc3RhZ3JhbV91cmwiOm51bGwsInJvbGUiOiJhZG1pbiJ9LCJpYXQiOjE2NjMwMTQwMTAsImV4cCI6MTY2MzEwMDQxMH0.NTRCduUBIcYuT5MG9uiWBHOpj1xwghz9E3JQ0AtqYw4
+@accessToken = Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxMiwiZmlyc3RfbmFtZSI6Ill1bWVkb2VlZWUiLCJsYXN0X25hbWUiOiJZdW1lZG8iLCJlbWFpbCI6Inl1bWVkb0BzdXJ2aXZvci5jb20iLCJsaW5rZWRpbl91cmwiOm51bGwsImdpdGh1Yl91cmwiOm51bGwsImluc3RhZ3JhbV91cmwiOm51bGwsInJvbGUiOiJhZG1pbiJ9LCJpYXQiOjE2NjczMTU0NjcsImV4cCI6MTY2NzQwMTg2N30.EQYkGwHEhusLqfEnngn9pHg6oiyVUYDjnl51YcVrUWM
 
 
 @refreshToken = Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxMiwiZmlyc3RfbmFtZSI6Ill1bWVkb2VlZWUiLCJsYXN0X25hbWUiOiJZdW1lZG8iLCJlbWFpbCI6Inl1bWVkb0BzdXJ2aXZvci5jb20iLCJsaW5rZWRpbl91cmwiOm51bGwsImdpdGh1Yl91cmwiOm51bGwsImluc3RhZ3JhbV91cmwiOm51bGwsInJvbGUiOiJhZG1pbiJ9LCJpYXQiOjE2NjI1Nzk5ODQsImV4cCI6MTY2Mjc1Mjc4NH0.akYqqB95sO-tticpMN1ds4UOil8XMZrRueQLiSAGv1w
@@ -94,7 +94,7 @@ Content-Type: application/json
 
 #^ ------------------------ fetchOneArticle
 ###
-GET {{entryPoint}}/users/12/articles/22
+GET {{entryPoint}}/users/12/articles/14
 Content-Type: application/json
 {{accessToken}}
 

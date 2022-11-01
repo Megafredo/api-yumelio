@@ -2,7 +2,7 @@ import { ErrorApi } from '../services/errorHandler.js';
 import debug from 'debug';
 const logger = debug('Controller');
 import { Article, User } from '../datamappers/index.js';
-async function createArticle(req, res) {
+const createArticle = async (req, res) => {
     try {
         const isUser = req.user?.id;
         const userExist = await User.findOne(isUser);
@@ -20,8 +20,8 @@ async function createArticle(req, res) {
         if (err instanceof Error)
             logger(err.message);
     }
-}
-async function fetchAllArticlesByUser(req, res) {
+};
+const fetchAllArticlesByUser = async (req, res) => {
     try {
         const userId = +req.params.userId;
         if (isNaN(userId))
@@ -38,8 +38,8 @@ async function fetchAllArticlesByUser(req, res) {
         if (err instanceof Error)
             logger(err.message);
     }
-}
-async function fetchOneArticleByUser(req, res) {
+};
+const fetchOneArticleByUser = async (req, res) => {
     try {
         const userId = +req.params.userId;
         if (isNaN(userId))
@@ -59,8 +59,8 @@ async function fetchOneArticleByUser(req, res) {
         if (err instanceof Error)
             logger(err.message);
     }
-}
-async function updateArticle(req, res) {
+};
+const updateArticle = async (req, res) => {
     try {
         const isUser = req.user?.id;
         const user = await User.findOne(isUser);
@@ -84,8 +84,8 @@ async function updateArticle(req, res) {
         if (err instanceof Error)
             logger(err.message);
     }
-}
-async function deleteArticle(req, res) {
+};
+const deleteArticle = async (req, res) => {
     try {
         const isUser = req.user?.id;
         const user = await User.findOne(isUser);
@@ -108,6 +108,6 @@ async function deleteArticle(req, res) {
         if (err instanceof Error)
             logger(err.message);
     }
-}
+};
 export { createArticle, fetchAllArticlesByUser, fetchOneArticleByUser, updateArticle, deleteArticle };
 //# sourceMappingURL=articleController.js.map

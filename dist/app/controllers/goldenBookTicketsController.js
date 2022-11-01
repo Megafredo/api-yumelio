@@ -2,7 +2,7 @@ import { ErrorApi } from '../services/errorHandler.js';
 import debug from 'debug';
 const logger = debug('Controller');
 import { GoldenBookTicket, User } from '../datamappers/index.js';
-async function createGoldenBookTicket(req, res) {
+const createGoldenBookTicket = async (req, res) => {
     try {
         const isUser = req.user?.id;
         const userExist = await User.findOne(isUser);
@@ -20,8 +20,8 @@ async function createGoldenBookTicket(req, res) {
         if (err instanceof Error)
             logger(err.message);
     }
-}
-async function fetchAllGoldenBookTickets(req, res) {
+};
+const fetchAllGoldenBookTickets = async (req, res) => {
     try {
         const isUser = req.user?.id;
         const userExist = await User.findOne(isUser);
@@ -36,8 +36,8 @@ async function fetchAllGoldenBookTickets(req, res) {
         if (err instanceof Error)
             logger(err.message);
     }
-}
-async function updateGoldenBookTicket(req, res) {
+};
+const updateGoldenBookTicket = async (req, res) => {
     try {
         const isUser = req.user?.id;
         const user = await User.findOne(isUser);
@@ -61,8 +61,8 @@ async function updateGoldenBookTicket(req, res) {
         if (err instanceof Error)
             logger(err.message);
     }
-}
-async function deleteGoldenBookTicket(req, res) {
+};
+const deleteGoldenBookTicket = async (req, res) => {
     try {
         const isUser = req.user?.id;
         const user = await User.findOne(isUser);
@@ -85,6 +85,6 @@ async function deleteGoldenBookTicket(req, res) {
         if (err instanceof Error)
             logger(err.message);
     }
-}
+};
 export { createGoldenBookTicket, fetchAllGoldenBookTickets, updateGoldenBookTicket, deleteGoldenBookTicket };
 //# sourceMappingURL=goldenBookTicketsController.js.map
