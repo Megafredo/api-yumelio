@@ -141,7 +141,6 @@ Express & Typescript :
 - [Middlewares](https://www.spiceworks.com/tech/cloud/articles/what-is-middleware/)
 - [Data Mapper](https://designpatternsphp.readthedocs.io/en/latest/Structural/DataMapper/README.html)
 
-
 Nodemailer :
 
 - [Nodemailer](https://nodemailer.com/) 
