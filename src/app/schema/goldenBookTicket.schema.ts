@@ -1,16 +1,13 @@
-import {JSONSchemaType} from "ajv"
+import { JSONSchemaType } from 'ajv';
+import { GoldenBookTicketSchema } from '../Types/custom.js';
 
-interface GbTicketSchema {
-    content: string;
-}
-
-const gbTicketSchema: JSONSchemaType<GbTicketSchema> = {
-    type: "object",
-    properties: {
-        content: { type: "string" }
-    },
-    required: ["content"],
-    additionalProperties: false
+const gbTicketSchema: JSONSchemaType<GoldenBookTicketSchema> = {
+  type: 'object',
+  properties: {
+    content: { type: 'string' },
+  },
+  required: ['content'],
+  additionalProperties: false,
 };
 
 export { gbTicketSchema };
