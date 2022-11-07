@@ -9,9 +9,6 @@ class CategoryDataMapper extends CoreDataMapper {
   //Functions
   createFunctionName = 'create_category';
   updateFunctionName = 'update_category';
-  
-
-
 }
 
 const Category = new CategoryDataMapper(client);
