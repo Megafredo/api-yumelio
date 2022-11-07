@@ -145,17 +145,17 @@ const deleteUser = async (req: Request, res: Response) => {
     const userId = req.user?.id;
 
     //~ Is id a number ?
-    await coreController.paramsHandler(req, res, 'userId');
+    const userIdParams = await coreController.paramsHandler(req, res, 'userId');
 
     //~ User exist ?
-    const user = await userModel.fetchUser(req, res, userId);
+    const user = await userModel.fetchUser(req, res, userIdParams);
 
     //~ Guard Clauses
     // only the user that want to access his info can or admin
-    if (userId === user.id || req.user?.role === 'admin') throw new ErrorApi(`You cannot access this info, go away !`, req, res, 400);
+    if (userId !== userIdParams && req.user?.role !== 'admin') throw new ErrorApi(`You cannot access this info, go away !`, req, res, 400);
 
     //~ Delete User
-    await userModel.deleteItem(userId);
+    await userModel.deleteItem(userIdParams);
 
     //~ Clean user session
     req.user = null;
