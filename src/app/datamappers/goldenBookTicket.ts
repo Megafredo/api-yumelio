@@ -5,7 +5,7 @@ import { CoreDataMapper } from './coreDataMapper.js';
 
 class GoldenBookTicketDataMapper extends CoreDataMapper {
   tableName = 'gb_ticket';
-  columns = `"id", "content", "created_at"`;
+  columns = `"id", "content", "created_at", "user_id"`;
 
   //Functions
   createFunctionName = 'create_gb_ticket';

@@ -2,78 +2,86 @@
 import { ErrorApi } from '../services/errorHandler.js';
 import { Request, Response } from 'express';
 import { baseConvertSvg } from '../utils/baseConvertSvg.js';
+import { coreController } from './coreController.js';
 //~ Import Debug
 import debug from 'debug';
 const logger = debug('Controller');
-//~ Import Datamapper
-import { Category } from '../datamappers/index.js';
+//~ Import Models
+import { categoryModel } from '../models/index.js';
 
 //~ Controller
-
+//& -------- createCategory
 const createCategory = async (req: Request, res: Response) => {
   try {
-    //~ Role 'admin' exist ?
-    if (req.user?.role === 'admin') {
-      const categoryCreated = await Category.create(req.body);
-      if (!categoryCreated) throw new ErrorApi(`No data found !`, req, res, 400);
+    //~ Guard Clauses
+    if (req.user?.role !== 'admin') throw new ErrorApi(`You cannot access this info, go away !`, req, res, 400);
 
-      return res.status(201).json('Category successfully created !');
-    } else throw new ErrorApi(`You cannot access this info, go away !`, req, res, 400);
+    //~ Create Category
+    await categoryModel.createItem(req, res);
+
+    //~ Result
+    return res.status(201).json('Category successfully created !');
   } catch (err) {
     if (err instanceof Error) logger(err.message);
   }
 };
 
+//& -------- fetchAllCategories
 const fetchAllCategories = async (req: Request, res: Response) => {
   try {
-    const categories = await Category.findAll();
+    //~ Fetch if exist
+    const categories = await categoryModel.fetchAllItems(req, res);
 
-    if (!categories) throw new ErrorApi(`No category found !`, req, res, 400);
-
+    //~ Convert Svg
     const result = baseConvertSvg(categories);
 
+    //~ Result
     return res.status(200).json(result);
   } catch (err) {
     if (err instanceof Error) logger(err.message);
   }
 };
 
+//& -------- updateCategory
 const updateCategory = async (req: Request, res: Response) => {
   try {
     //~ Is id a number ?
-    const categoryId = +req.params.categoryId;
-    if (isNaN(categoryId)) throw new ErrorApi(`Id must be a number`, req, res, 400);
+    const categoryId = await coreController.paramsHandler(req, res, 'categoryId');
 
-    //~ Category exist ?
-    const oneCategory = await Category.findOne(categoryId);
-    if (!oneCategory) throw new ErrorApi(`Category doesn't exist`, req, res, 400);
+    //~ Fetch if exist
+    await categoryModel.fetchOneItem(req, res, categoryId);
 
-    //~ Role 'admin' exist ?
-    if (req.user?.role === 'admin') {
-      req.body = { ...req.body, id: categoryId };
-      await Category.update(req.body);
-      res.status(200).json(`Category successfully updated !`);
-    } else throw new ErrorApi(`You cannot access this info, go away !`, req, res, 400);
+    //~ Guard Clauses
+    if (req.user?.role !== 'admin') throw new ErrorApi(`You cannot access this info, go away !`, req, res, 400);
+
+    //~ Update Category
+    req.body = { ...req.body, id: categoryId };
+    await categoryModel.updateItem(req);
+
+    //~ Result
+    res.status(200).json(`Category successfully updated !`);
   } catch (err) {
     if (err instanceof Error) logger(err.message);
   }
 };
 
+//& -------- deleteCategory
 const deleteCategory = async (req: Request, res: Response) => {
   try {
     //~ Is id a number ?
-    const categoryId = +req.params.categoryId;
-    if (isNaN(categoryId)) throw new ErrorApi(`Id must be a number`, req, res, 400);
+    const categoryId = await coreController.paramsHandler(req, res, 'categoryId');
 
-    //~ Category exist ?
-    const oneCategory = await Category.findOne(categoryId);
-    if (!oneCategory) throw new ErrorApi(`Category doesn't exist`, req, res, 400);
+    //~ Fetch if exist
+    await categoryModel.fetchOneItem(req, res, categoryId);
 
-    //~ Role 'admin' exist ?
-    if (req.user?.role === 'admin') {
-      await Category.delete(categoryId);
-      return res.status(200).json(`Category successfully deleted`);
-    } else throw new ErrorApi(`You cannot access this info, go away !`, req, res, 400);
+    //~ Guard Clauses
+    if (req.user?.role !== 'admin') throw new ErrorApi(`You cannot access this info, go away !`, req, res, 400);
+
+    //~ Delete Category
+    await categoryModel.deleteItem(categoryId);
+
+    //~ Result
+    return res.status(200).json(`Category successfully deleted`);
   } catch (err) {
     if (err instanceof Error) logger(err.message);
   }

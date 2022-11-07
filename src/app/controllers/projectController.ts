@@ -1,133 +1,124 @@
 //~ Import modules
 import { ErrorApi } from '../services/errorHandler.js';
-import debug from 'debug';
-const logger = debug('Controller');
 import { Request, Response } from 'express';
 import { baseConvertSvgByElement } from '../utils/baseConvertSvg.js';
-//~ Import Datamapper
-import { Project, User } from '../datamappers/index.js';
+import { coreController } from './coreController.js';
+//~ Import Debug
+import debug from 'debug';
+const logger = debug('Controller');
+//~ Import Models
+import { userModel, projectModel } from '../models/index.js';
 
-//~ Controller
-
+//~ -------- Controller
+//& -------- createProject
 const createProject = async (req: Request, res: Response) => {
   try {
-    const isUser = req.user?.id;
+    const userId = req.user?.id;
 
-    //~ User exist ?
-    const userExist = await User.findOne(isUser);
-    if (!userExist) throw new ErrorApi(`User doesn't exist`, req, res, 400);
+    //~ Fetch if exist
+    const userExist = await userModel.fetchUser(req, res, userId);
 
-    if (isUser !== userExist.id) throw new ErrorApi(`Given informations not allows any modification`, req, res, 403);
+    //~ Guard Clauses
+    if (userId !== userExist.id) throw new ErrorApi(`Given informations not allows any modification`, req, res, 403);
 
-    //~ Is project created ?
-    req.body = { ...req.body, user_id: isUser };
-    const projectCreated = await Project.createWithCategories(req.body);
+    //~ Create project
+    req.body = { ...req.body, user_id: userId };
+    await projectModel.createItem(req.body, res);
 
-    if (!projectCreated) throw new ErrorApi(`No data found !`, req, res, 400);
-
+    //~ Result
     return res.status(201).json('Project successfully created !');
   } catch (err) {
     if (err instanceof Error) logger(err.message);
   }
 };
 
+//& -------- fetchAllProjects
 const fetchAllProjects = async (req: Request, res: Response) => {
   try {
     //~ Is id a number ?
-    const userId = +req.params.userId;
-    if (isNaN(userId)) throw new ErrorApi(`Id must be a number`, req, res, 400);
+    const userId = await coreController.paramsHandler(req, res, 'userId');
 
-    //~ User exist ?
-    const user = await User.findOne(userId);
-    if (!user) throw new ErrorApi(`User doesn't exist`, req, res, 400);
+    //~ Fetch if exist
+    await userModel.fetchUser(req, res, userId);
+    const projects = await projectModel.fetchAllItems(req, res, userId);
 
-    const project = await Project.findAllProjectsByUserWithCategories(userId);
-    if (!project) throw new ErrorApi(`No Project found !`, req, res, 400);
+    //~ Convert logo category into base64
+    const result = baseConvertSvgByElement(projects);
 
-    //~Convert logo category into base64
-    const result = baseConvertSvgByElement(project);
-
+    //~ Result
     return res.status(200).json(result);
   } catch (err) {
     if (err instanceof Error) logger(err.message);
   }
 };
 
+//& -------- fetchOneProject
 const fetchOneProject = async (req: Request, res: Response) => {
   try {
     //~ Is id a number ?
-    const userId = +req.params.userId;
-    if (isNaN(userId)) throw new ErrorApi(`Id must be a number`, req, res, 400);
+    const userId = await coreController.paramsHandler(req, res, 'userId');
+    const projectId = await coreController.paramsHandler(req, res, 'projectId');
 
-    //~ User exist ?
-    const user = await User.findOne(userId);
-    if (!user) throw new ErrorApi(`User doesn't exist`, req, res, 400);
-
-    //~ Is id a number ?
-    const projectId = +req.params.projectId;
-    if (isNaN(projectId)) throw new ErrorApi(`Id must be a number`, req, res, 400);
-
-    //~ Project exist ?
-    const oneProject = await Project.findOneByUser(userId, projectId);
-    if (!oneProject) throw new ErrorApi(`No Project found !`, req, res, 400);
+    //~ Fetch if exist
+    await userModel.fetchUser(req, res, userId);
+    const oneProject = await projectModel.fetchOneItem(req, res, userId, projectId);
 
     //~Convert logo category into base64
     const result = baseConvertSvgByElement([oneProject]);
 
+    //~ Result
     return res.status(200).json(result);
   } catch (err) {
     if (err instanceof Error) logger(err.message);
   }
 };
 
+//& -------- updateProject
 const updateProject = async (req: Request, res: Response) => {
   try {
-    //~ Is id a number ?
-    const isUser = req.user?.id;
-
-    //~ User exist ?
-    const user = await User.findOne(isUser);
-    if (!user) throw new ErrorApi(`User doesn't exist`, req, res, 400);
+    const userId = req.user?.id;
 
     //~ Is id a number ?
-    const projectId = +req.params.projectId;
-    if (isNaN(projectId)) throw new ErrorApi(`Id must be a number`, req, res, 400);
+    const projectId = await coreController.paramsHandler(req, res, 'projectId');
 
-    //~ Article exist ?
-    const oneProject = await Project.findOneByUser(isUser, projectId);
-    if (!oneProject) throw new ErrorApi(`Project doesn't exist`, req, res, 400);
+    //~ Fetch if exist
+    const user = await userModel.fetchUser(req, res, userId);
+    await projectModel.fetchOneItem(req, res, userId, projectId);
 
-    if (isUser === user.id && req.user?.role === 'admin') {
-      req.body = { ...req.body, user_id: isUser, id: projectId };
-      await Project.updateWithCategories(req.body);
-      res.status(200).json(`Project successfully updated !`);
-    } else throw new ErrorApi(`You cannot access this info, go away !`, req, res, 400);
+    //~ Guard Clauses
+    if (userId !== user.id && req.user?.role !== 'admin') throw new ErrorApi(`You cannot access this info, go away !`, req, res, 400);
+
+    //~ Update project
+    req.body = { ...req.body, id: projectId, user_id: userId, };
+    await projectModel.updateItem(req);
+
+    //~ Result
+    res.status(200).json(`Project successfully updated !`);
   } catch (err) {
     if (err instanceof Error) logger(err.message);
   }
 };
 
+//& -------- deleteProject
 const deleteProject = async (req: Request, res: Response) => {
   try {
-    //~ Is id a number ?
-    const isUser = req.user?.id;
-
-    //~ User exist ?
-    const user = await User.findOne(isUser);
-    if (!user) throw new ErrorApi(`User doesn't exist`, req, res, 400);
+    const userId = req.user?.id;
 
     //~ Is id a number ?
-    const projectId = +req.params.projectId;
-    if (isNaN(projectId)) throw new ErrorApi(`Id must be a number`, req, res, 400);
+    const projectId = await coreController.paramsHandler(req, res, 'projectId');
 
-    //~ article exist ?
-    const oneProject = await Project.findOneByUser(isUser, projectId);
-    if (!oneProject) throw new ErrorApi(`Project doesn't exist`, req, res, 400);
+    //~ Exist
+    const user = await userModel.fetchUser(req, res, userId);
+    await projectModel.fetchOneItem(req, res, userId, projectId);
 
-    if (isUser === user.id && req.user?.role === 'admin') {
-      await Project.delete(projectId);
-      return res.status(200).json(`Project successfully deleted`);
-    } else throw new ErrorApi(`You cannot access this info, go away !`, req, res, 400);
+    //~ Guard Clauses
+    if (userId !== user.id && req.user?.role !== 'admin') throw new ErrorApi(`You cannot access this info, go away !`, req, res, 400);
+
+    //~ Delete project
+    await projectModel.deleteItem(projectId);
+
+    //~ Result
+    return res.status(200).json(`Project successfully deleted`);
   } catch (err) {
     if (err instanceof Error) logger(err.message);
   }

@@ -1,10 +1,6 @@
-import {JSONSchemaType} from "ajv"
+import { JSONSchemaType } from "ajv";
+import { ArticleSchema } from '../Types/custom.js';
 
-interface ArticleSchema {
-    title: string;
-    abstract: string;
-    content: string;
-}
 
 const articleSchema: JSONSchemaType<ArticleSchema> = {
     type: "object",
