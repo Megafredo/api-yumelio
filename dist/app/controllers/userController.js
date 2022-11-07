@@ -1,22 +1,21 @@
 import { ErrorApi } from '../services/errorHandler.js';
-import { User } from '../datamappers/index.js';
 import { sendEmail } from '../services/nodemailerAuto.js';
+import { coreController } from './coreController.js';
 import bcrypt from 'bcrypt';
 import { generateAccessToken, generateRefreshToken } from '../services/jsonWebToken.js';
 import debug from 'debug';
 const logger = debug('Controller');
+import { userModel } from '../models/index.js';
 const doSignUp = async (req, res) => {
     try {
         let { email, password, passwordConfirm } = req.body;
-        const userExist = await User.findUserIdentity(email);
-        if (userExist)
-            throw new ErrorApi(`User already exist !`, req, res, 401);
+        await userModel.checkEmail(req, res, email);
         if (password !== passwordConfirm)
             throw new ErrorApi(`Not the same password`, req, res, 401);
         const salt = await bcrypt.genSalt(10);
         password = await bcrypt.hash(password, salt);
         req.body.password = password;
-        await User.create(req.body);
+        await userModel.createItem(req, res);
         await sendEmail.toUser(email, 'subscribe');
         return res.status(201).json(`User successfully created !`);
     }
@@ -28,9 +27,7 @@ const doSignUp = async (req, res) => {
 const doSignIn = async (req, res) => {
     try {
         let { email, password } = req.body;
-        const userExist = await User.findUserIdentity(email);
-        if (!userExist)
-            throw new ErrorApi(`User unknown !`, req, res, 401);
+        const userExist = await userModel.fetchEmail(req, res, email);
         const validPwd = await bcrypt.compare(password, userExist.password);
         if (!validPwd)
             throw new ErrorApi(`Email or password not valid !`, req, res, 401);
@@ -58,12 +55,8 @@ const doSignOut = async (req, res) => {
 };
 const fetchOneUser = async (req, res) => {
     try {
-        const userId = +req.params.userId;
-        if (isNaN(userId))
-            throw new ErrorApi(`Id must be a number`, req, res, 400);
-        const user = await User.findOne(userId);
-        if (!user)
-            throw new ErrorApi(`User doesn't exist`, req, res, 400);
+        const userId = await coreController.paramsHandler(req, res, 'userId');
+        const user = await userModel.fetchUser(req, res, userId);
         delete user['password'];
         return res.status(200).json(user);
     }
@@ -74,16 +67,10 @@ const fetchOneUser = async (req, res) => {
 };
 const updateUser = async (req, res) => {
     try {
-        let { password, passwordConfirm } = req.body;
-        const userId = +req.params.userId;
-        if (isNaN(userId))
-            throw new ErrorApi(`Id must be a number`, req, res, 400);
-        const user = await User.findOne(userId);
-        if (!user)
-            throw new ErrorApi(`User doesn't exist`, req, res, 400);
-        const userExist = await User.findUserIdentity(req.body.email);
-        if (userExist)
-            throw new ErrorApi(`Email already exist !`, req, res, 401);
+        let { email, password, passwordConfirm } = req.body;
+        const userId = await coreController.paramsHandler(req, res, 'userId');
+        await userModel.fetchUser(req, res, userId);
+        await userModel.checkEmail(req, res, email);
         if (password) {
             if (password !== passwordConfirm)
                 throw new ErrorApi(`Not the same password !`, req, res, 401);
@@ -94,7 +81,7 @@ const updateUser = async (req, res) => {
         if (req.user?.id !== userId)
             throw new ErrorApi(`Given informations not allows any modification`, req, res, 403);
         req.body = { ...req.body, id: userId };
-        await User.update(req.body);
+        await userModel.updateItem(req);
         return res.status(200).json(`Informations successfully updated !`);
     }
     catch (err) {
@@ -104,22 +91,16 @@ const updateUser = async (req, res) => {
 };
 const deleteUser = async (req, res) => {
     try {
-        const userId = +req.params.userId;
-        if (isNaN(userId))
-            throw new ErrorApi(`Id must be a number`, req, res, 400);
-        const user = await User.findOne(userId);
-        if (!user)
-            throw new ErrorApi(`User doesn't exist`, req, res, 400);
-        const isUser = req.user?.id;
-        if (isUser === userId || req.user?.role === 'admin') {
-            await User.delete(userId);
-            req.user = null;
-            req.session.destroy();
-            await sendEmail.toUser(user.email, 'unsubscribe');
-            return res.status(200).json(`User successfully deleted`);
-        }
-        else
+        const userId = req.user?.id;
+        const userIdParams = await coreController.paramsHandler(req, res, 'userId');
+        const user = await userModel.fetchUser(req, res, userIdParams);
+        if (userId !== userIdParams && req.user?.role !== 'admin')
             throw new ErrorApi(`You cannot access this info, go away !`, req, res, 400);
+        await userModel.deleteItem(userIdParams);
+        req.user = null;
+        req.session.destroy();
+        await sendEmail.toUser(user.email, 'unsubscribe');
+        return res.status(200).json(`User successfully deleted`);
     }
     catch (err) {
         if (err instanceof Error)

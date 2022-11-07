@@ -12,13 +12,13 @@ const projectSchema = {
             type: 'array',
             items: {
                 type: 'object',
-                properties: { id: { type: 'number', nullable: true } },
+                properties: { id: { type: 'number' } },
             },
-            nullable: true
-        }
+            nullable: true,
+        },
     },
     required: ['title', 'abstract', 'content', 'picture', 'date'],
-    additionalProperties: false
+    additionalProperties: false,
 };
 export { projectSchema };
 //# sourceMappingURL=project.schema.js.map

@@ -1,19 +1,16 @@
 import { ErrorApi } from '../services/errorHandler.js';
+import { coreController } from './coreController.js';
 import debug from 'debug';
 const logger = debug('Controller');
-import { Article, User } from '../datamappers/index.js';
+import { userModel, articleModel } from '../models/index.js';
 const createArticle = async (req, res) => {
     try {
-        const isUser = req.user?.id;
-        const userExist = await User.findOne(isUser);
-        if (!userExist)
-            throw new ErrorApi(`User doesn't exist`, req, res, 400);
-        if (isUser !== userExist.id)
+        const userId = req.user?.id;
+        const userExist = await userModel.fetchUser(req, res, userId);
+        if (userId !== userExist.id)
             throw new ErrorApi(`Given informations not allows any modification`, req, res, 403);
-        req.body = { ...req.body, user_id: isUser };
-        const articleCreated = await Article.create(req.body);
-        if (!articleCreated)
-            throw new ErrorApi(`No data found !`, req, res, 400);
+        req.body = { ...req.body, user_id: userId };
+        await articleModel.createItem(req, res);
         return res.status(201).json('Article successfully created !');
     }
     catch (err) {
@@ -23,15 +20,9 @@ const createArticle = async (req, res) => {
 };
 const fetchAllArticlesByUser = async (req, res) => {
     try {
-        const userId = +req.params.userId;
-        if (isNaN(userId))
-            throw new ErrorApi(`Id must be a number`, req, res, 400);
-        const user = await User.findOne(userId);
-        if (!user)
-            throw new ErrorApi(`User doesn't exist`, req, res, 400);
-        const articles = await Article.findAllByUser(userId);
-        if (!articles)
-            throw new ErrorApi(`No article found !`, req, res, 400);
+        const userId = await coreController.paramsHandler(req, res, 'userId');
+        await userModel.fetchUser(req, res, userId);
+        const articles = await articleModel.fetchAllItems(req, res, userId);
         return res.status(200).json(articles);
     }
     catch (err) {
@@ -41,18 +32,10 @@ const fetchAllArticlesByUser = async (req, res) => {
 };
 const fetchOneArticleByUser = async (req, res) => {
     try {
-        const userId = +req.params.userId;
-        if (isNaN(userId))
-            throw new ErrorApi(`Id must be a number`, req, res, 400);
-        const user = await User.findOne(userId);
-        if (!user)
-            throw new ErrorApi(`User doesn't exist`, req, res, 400);
-        const articleId = +req.params.articleId;
-        if (isNaN(articleId))
-            throw new ErrorApi(`Id must be a number`, req, res, 400);
-        const oneArticle = await Article.findOneByUser(userId, articleId);
-        if (!oneArticle)
-            throw new ErrorApi(`No article found !`, req, res, 400);
+        const userId = await coreController.paramsHandler(req, res, 'userId');
+        const articleId = await coreController.paramsHandler(req, res, 'articleId');
+        await userModel.fetchUser(req, res, userId);
+        const oneArticle = await articleModel.fetchOneItem(req, res, userId, articleId);
         return res.status(200).json(oneArticle);
     }
     catch (err) {
@@ -62,23 +45,15 @@ const fetchOneArticleByUser = async (req, res) => {
 };
 const updateArticle = async (req, res) => {
     try {
-        const isUser = req.user?.id;
-        const user = await User.findOne(isUser);
-        if (!user)
-            throw new ErrorApi(`User doesn't exist`, req, res, 400);
-        const articleId = +req.params.articleId;
-        if (isNaN(articleId))
-            throw new ErrorApi(`Id must be a number`, req, res, 400);
-        const oneArticle = await Article.findOneByUser(isUser, articleId);
-        if (!oneArticle)
-            throw new ErrorApi(`Article doesn't exist`, req, res, 400);
-        if (isUser === user.id && req.user?.role === 'admin') {
-            req.body = { ...req.body, user_id: isUser, id: articleId };
-            await Article.update(req.body);
-            res.status(200).json(`Article successfully updated !`);
-        }
-        else
+        const userId = req.user?.id;
+        const articleId = await coreController.paramsHandler(req, res, 'articleId');
+        const user = await userModel.fetchUser(req, res, userId);
+        await articleModel.fetchOneItem(req, res, userId, articleId);
+        if (userId !== user.id && req.user?.role !== 'admin')
             throw new ErrorApi(`You cannot access this info, go away !`, req, res, 400);
+        req.body = { ...req.body, id: articleId, user_id: userId, };
+        await articleModel.updateItem(req);
+        return res.status(200).json(`Article successfully updated !`);
     }
     catch (err) {
         if (err instanceof Error)
@@ -87,22 +62,14 @@ const updateArticle = async (req, res) => {
 };
 const deleteArticle = async (req, res) => {
     try {
-        const isUser = req.user?.id;
-        const user = await User.findOne(isUser);
-        if (!user)
-            throw new ErrorApi(`User doesn't exist`, req, res, 400);
-        const articleId = +req.params.articleId;
-        if (isNaN(articleId))
-            throw new ErrorApi(`Id must be a number`, req, res, 400);
-        const article = await Article.findOneByUser(isUser, articleId);
-        if (!article)
-            throw new ErrorApi(`Article doesn't exist`, req, res, 400);
-        if (isUser === user.id && req.user?.role === 'admin') {
-            await Article.delete(articleId);
-            return res.status(200).json(`Article successfully deleted`);
-        }
-        else
+        const userId = req.user?.id;
+        const articleId = await coreController.paramsHandler(req, res, 'articleId');
+        const user = await userModel.fetchUser(req, res, userId);
+        await articleModel.fetchOneItem(req, res, userId, articleId);
+        if (userId !== user.id && req.user?.role !== 'admin')
             throw new ErrorApi(`You cannot access this info, go away !`, req, res, 400);
+        await articleModel.deleteItem(articleId);
+        return res.status(200).json(`Article successfully deleted`);
     }
     catch (err) {
         if (err instanceof Error)
