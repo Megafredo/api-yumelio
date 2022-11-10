@@ -1,10 +1,10 @@
 const gbTicketSchema = {
-    type: "object",
+    type: 'object',
     properties: {
-        content: { type: "string" }
+        content: { type: 'string' },
     },
-    required: ["content"],
-    additionalProperties: false
+    required: ['content'],
+    additionalProperties: false,
 };
 export { gbTicketSchema };
 //# sourceMappingURL=goldenBookTicket.schema.js.map

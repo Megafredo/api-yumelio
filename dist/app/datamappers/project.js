@@ -14,7 +14,7 @@ class ProjectDataMapper extends CoreDataMapper {
         if (this.client instanceof pg.Pool) {
             const preparedQuery = {
                 text: `SELECT * FROM "${this.projectByUser}"($1, $2);`,
-                values: [userId, projectId]
+                values: [userId, projectId],
             };
             const result = await this.client.query(preparedQuery);
             if (!result.rows[0])
@@ -26,7 +26,7 @@ class ProjectDataMapper extends CoreDataMapper {
         if (this.client instanceof pg.Pool) {
             const preparedQuery = {
                 text: `SELECT * FROM ${this.projectsByUser}($1);`,
-                values: [userId]
+                values: [userId],
             };
             const result = await this.client.query(preparedQuery);
             if (!result.rows[0])
@@ -38,7 +38,7 @@ class ProjectDataMapper extends CoreDataMapper {
         if (this.client instanceof pg.Pool) {
             const preparedQuery = {
                 text: `SELECT * FROM ${this.createWithCategoriesFunctionName}($1);`,
-                values: [inputData]
+                values: [inputData],
             };
             const result = await this.client.query(preparedQuery);
             return result.rows[0];
@@ -48,7 +48,7 @@ class ProjectDataMapper extends CoreDataMapper {
         if (this.client instanceof pg.Pool) {
             const preparedQuery = {
                 text: `SELECT * FROM ${this.updateWithCategoriesFunctionName}($1);`,
-                values: [inputData]
+                values: [inputData],
             };
             const result = await this.client.query(preparedQuery);
             return result.rows[0];
