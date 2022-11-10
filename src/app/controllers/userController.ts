@@ -161,7 +161,7 @@ const deleteUser = async (req: Request, res: Response) => {
     req.user = null;
     req.session.destroy();
 
-    //~ Send an email to confirm creation
+    //~ Send an email to confirm delete user
     await sendEmail.toUser(user.email, 'unsubscribe');
 
     //~ Result
