@@ -20,7 +20,6 @@ const validation = {
     //valid req.body format
     return function(req: Request, res: Response, next: NextFunction) {
       const validate = ajv.compile(schemaCustom);
-      console.log('validate------------------------------------------------------------------: ', 'TRUC');
 
       if (validate(req.body)) {
         next();
