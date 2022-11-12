@@ -13,7 +13,7 @@ function getRefreshToken(req: Request, res: Response, next: NextFunction) {
     //get token from header
     const authHeader = req.headers['authorization'];
 
-    if (authHeader === undefined) throw new ErrorApi('No tokens found !', req, res, 400);
+    if (authHeader === undefined) throw new ErrorApi('No token found !', req, res, 400);
 
     //   header contains token "Bearer <token>", split the string and get the 2nd part of the array
     let refreshToken = authHeader.split(' ')[1];
