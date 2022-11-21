@@ -20,7 +20,6 @@ To configure the server and to launch the application, you have to :
 - import helmet for data and identity security
 - Set the header to configure the [CORS](https://developer.mozilla.org/fr/docs/Web/HTTP/CORS) to share the resources
 
-
 ```js
 //~ Dotenv
 import 'dotenv/config';
@@ -110,6 +109,6 @@ if (process.env.NODE_ENV !== 'test') {
 
 ```
 
-___
+---
 
 [Previous](./05_endpoints.md) | [Home](../README.md) | [Next](./07_structure.md)
