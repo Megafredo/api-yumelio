@@ -19,7 +19,6 @@ app.use(helmet());
 import debug from 'debug';
 const logger = debug('EntryPoint');
 
-
 //~ IMPORTATION SWAGGER DOCS
 import { specs, serve, setup, cssOptions } from './app/swaggerDocs/swaggerDocs.js';
 app.use('/api-docs', serve, setup(specs, cssOptions));
@@ -30,7 +29,7 @@ app.use(express.json());
 // accept Content-type: application/x-www-form-urlencoded
 app.use(
   express.urlencoded({
-    extended: false
+    extended: false,
   })
 );
 
@@ -39,6 +38,8 @@ app.use((req: Request, res: Response, next) => {
   res.setHeader('Access-Control-Allow-Origin', 'http://127.0.0.1:6001');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
   res.setHeader('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST,PUT,PATCH,DELETE');
+  res.setHeader('Access-Control-Allow-Credentials', 'true');
+  // Accept credentials (cookies) sent by the client
 
   // res.setHeader('Access-Control-Allow-Headers', 'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers');
 
@@ -63,8 +64,8 @@ app.use(
       secure: true,
       sameSite: 'lax', // or 'strict'
       maxAge: 24 * 60 * 60 * 1000, //24 hours
-      expires : new Date(Date.now() + 60 * 60 * 1000) //1 hour
-    }
+      expires: new Date(Date.now() + 60 * 60 * 1000), //1 hour
+    },
   })
 );
 
