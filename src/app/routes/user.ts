@@ -23,7 +23,7 @@ router.get('/api/v1/users/:userId(\\d+)', [validateToken, auth, admin], fetchOne
 router.patch('/api/v1/users/:userId(\\d+)', validate(userUpdateSchema), [validateToken, auth], updateUser);
 router.delete('/api/v1/users/:userId(\\d+)', [validateToken, auth], deleteUser);
 
-router.post('/api/v1/refreshToken',[getRefreshToken], refreshToken);
+router.post('/api/v1/refreshToken', [getRefreshToken], refreshToken);
 
 //~ Export router
 export { router };
