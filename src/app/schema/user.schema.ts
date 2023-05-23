@@ -1,30 +1,37 @@
 import { JSONSchemaType } from 'ajv';
-
-interface UserSchema {
-  first_name?: string;
-  last_name?: string;
-  email: string;
-  password: string;
-  passwordConfirm: string;
-  linkedin_url?: string;
-  github_url?: string;
-  instagram_url?: string;
-}
+import { UserSchema } from '../Types/custom.js';
 
 const userSchema: JSONSchemaType<UserSchema> = {
   type: 'object',
   properties: {
-    first_name: { type: 'string', nullable: true },
-    last_name: { type: 'string', nullable: true },
+    first_name: { type: 'string'},
+    last_name: { type: 'string' },
     email: { type: 'string', pattern: '^[-a-zA-Z0-9.-_]+@[\\w-]+(?:\\.[\\w-]{2,4})$' },
     password: { type: 'string', pattern: '^(?=.*[0-9])(?=.*[-a-z])(?=.*[-A-Z]).{8,}$' },
     passwordConfirm: { type: 'string' },
-    linkedin_url: { type: 'string', nullable: true },
-    github_url: { type: 'string', nullable: true },
-    instagram_url: { type: 'string', nullable: true }
+    linkedin_url: { type: 'string' },
+    github_url: { type: 'string' },
+    instagram_url: { type: 'string' }
   },
   required: ['email', 'password', 'passwordConfirm'],
   additionalProperties: false
 };
 
-export { userSchema };
+const userUpdateSchema: JSONSchemaType<UserSchema> = {
+  type: 'object',
+  properties: {
+    first_name: { type: 'string'},
+    last_name: { type: 'string' },
+    email: { type: 'string', pattern: '^[-a-zA-Z0-9.-_]+@[\\w-]+(?:\\.[\\w-]{2,4})$' },
+    password: { type: 'string', pattern: '^(?=.*[0-9])(?=.*[-a-z])(?=.*[-A-Z]).{8,}$' },
+    passwordConfirm: { type: 'string' },
+    linkedin_url: { type: 'string' },
+    github_url: { type: 'string' },
+    instagram_url: { type: 'string' }
+  },
+  required: [],
+  additionalProperties: false
+};
+
+
+export { userSchema, userUpdateSchema };

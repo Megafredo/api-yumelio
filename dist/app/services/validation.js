@@ -7,7 +7,6 @@ const validation = {
     body(schemaCustom) {
         return function (req, res, next) {
             const validate = ajv.compile(schemaCustom);
-            console.log('validate------------------------------------------------------------------: ', 'TRUC');
             if (validate(req.body)) {
                 next();
             }

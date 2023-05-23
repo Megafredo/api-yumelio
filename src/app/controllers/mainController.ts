@@ -3,8 +3,8 @@ import debug from 'debug';
 const logger = debug('Controller');
 import { Request, Response } from 'express';
 
-//~ Controller
-
+//~ -------- Controller
+//& -------- renderHomePage
 const renderHomePage = (req: Request, res: Response) => {
   try {
     res.json({

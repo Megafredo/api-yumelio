@@ -13,14 +13,14 @@ function getRefreshToken(req: Request, res: Response, next: NextFunction) {
     //get token from header
     const authHeader = req.headers['authorization'];
 
-    if (authHeader === undefined) throw new ErrorApi('Aucun token trouvé', req, res, 400);
+    if (authHeader === undefined) throw new ErrorApi('No token found !', req, res, 400);
 
     //   header contains token "Bearer <token>", split the string and get the 2nd part of the array
     let refreshToken = authHeader.split(' ')[1];
 
     jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET!, (err: unknown, user: any) => {
       if (err) {
-        throw new ErrorApi('Le token est invalide !', req, res, 403);
+        throw new ErrorApi('The token is invalid!', req, res, 403);
       }
       // reset refresh token in session
       req.session.refreshToken = [];
