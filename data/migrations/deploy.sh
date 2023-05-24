@@ -1,7 +1,7 @@
 #~ DEPLOY
 # Export variables d'environnements
 export PGUSER=yumelio
-export PGPASSWORD='u*A0E#$!'
+export PGPASSWORD=''
 ##* PUT YOUR PASSWORD !!!!!
 
 # https://sqitch.org/docs/manual/sqitch-deploy/
