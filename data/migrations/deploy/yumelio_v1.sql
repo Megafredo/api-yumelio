@@ -15,7 +15,7 @@ CREATE DOMAIN EMAIL AS TEXT CHECK (
 --& Vérification du password
 -- Minimum 8 caractères - comprenant au moins un chiffre, une minuscule, une majuscule, un caractère spécial minimum
 CREATE DOMAIN PWD AS TEXT CHECK (
-    VALUE ~ '^(?#password)(?=.*[0-9])(?=.*[-a-z])(?=.*[-A-Z]).{8,}$'
+    VALUE ~ '^(?#password)(?=.*[0-9])(?=.*[-a-z])(?=.*[-A-Z])(?=.*[!@#$%^&*()_+-=[]{};\':"\\|,.<>/?]).{8,}$'
 );
 
 --& Vérification de l'url
